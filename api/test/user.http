@@ -1,0 +1,86 @@
+@URL=http://localhost:3000
+@JSON=Content-Type: application/json
+
+###
+GET {{URL}}/api/user/test1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NmQ5NmI0ODAxOTEyYTg4YTUyZDNhNmIiLCJ1c2VybmFtZSI6ImFkbWluMSIsImVtYWlsIjoiYWRtaW4xQHNpbmEuY29tIiwiaWF0IjoxNzI1NTI1MTg2LCJleHAiOjE3MjU2MTE1ODZ9.ql_pCBAJ_JHDqTslNY0YXpr3fLgP2d8Vo8DE3HfAtMU
+
+###
+POST {{URL}}/api/user/login
+{{JSON}}
+
+{
+    "username": "admin1",
+    "password": "123"
+}
+
+
+###
+POST {{URL}}/api/user/register
+Content-Type: application/json
+
+{
+    "username": "admin1",
+    "email": "admin1@sina.com",
+    "password": "123"
+}
+
+### update user profile
+PUT {{URL}}/api/user/edit
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImVtYWlsIjoiYWRtaW4xQHNpbmEuY29tIiwiaWF0IjoxNzI1NjA2OTcwLCJleHAiOjE3MjU2OTMzNzB9.0iBBn_fds44i4HQoa-WqNj9j032_ZPriWIBZS3k4GsU
+{{JSON}}
+
+{
+    "age": 20,
+    "gender": 0,
+    "phoneNumber": "15268528814",
+    "address": "xxx street"
+}
+
+### reset user password
+PUT {{URL}}/api/user/resetPassword
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImVtYWlsIjoiYWRtaW4xQHNpbmEuY29tIiwiaWF0IjoxNzI1NjA2OTcwLCJleHAiOjE3MjU2OTMzNzB9.0iBBn_fds44i4HQoa-WqNj9j032_ZPriWIBZS3k4GsU
+{{JSON}}
+
+{
+    "password": "1234",
+    "newPassword": "123"
+}
+
+### get user profile
+GET {{URL}}/api/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImVtYWlsIjoiYWRtaW4xQHNpbmEuY29tIiwiaWF0IjoxNzI1NjA2OTcwLCJleHAiOjE3MjU2OTMzNzB9.0iBBn_fds44i4HQoa-WqNj9j032_ZPriWIBZS3k4GsU
+
+
+### create plant category
+POST {{URL}}/api/categories/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImVtYWlsIjoiYWRtaW4xQHNpbmEuY29tIiwiaWF0IjoxNzI1ODUzNDcyLCJleHAiOjE3MjU5Mzk4NzJ9.GJIfupiunVZDw6iExEoe6FesyMMfGeRaYZnSOCRkYLY
+{{JSON}}
+
+{
+    "name": "Trees",
+    "description": "This is tree"
+}
+
+### list plants category
+GET {{URL}}/api/categories/list
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImVtYWlsIjoiYWRtaW4xQHNpbmEuY29tIiwiaWF0IjoxNzI1ODUzNDcyLCJleHAiOjE3MjU5Mzk4NzJ9.GJIfupiunVZDw6iExEoe6FesyMMfGeRaYZnSOCRkYLY
+
+### create event
+POST {{URL}}/api/events/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInVzZXJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbjFAc2luYS5jb20iLCJpYXQiOjE3MjU4NjM5NzYsImV4cCI6MTcyNTk1MDM3Nn0.aAjIWOB4Tg3CI4Yu4quDS3pUkh7U6BgAc2JcAx561LY
+{{JSON}}
+
+{
+    "title": "Meeting2",
+    "content": "Having a meeting2",
+    "notified_datetime": "2024-09-11 16:00:00"
+}
+
+### list event
+GET {{URL}}/api/events/list
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInVzZXJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbjFAc2luYS5jb20iLCJpYXQiOjE3MjU4NjM5NzYsImV4cCI6MTcyNTk1MDM3Nn0.aAjIWOB4Tg3CI4Yu4quDS3pUkh7U6BgAc2JcAx561LY
+
+### delete event
+DELETE {{URL}}/api/events/1/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInVzZXJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbjFAc2luYS5jb20iLCJpYXQiOjE3MjU4NjM5NzYsImV4cCI6MTcyNTk1MDM3Nn0.aAjIWOB4Tg3CI4Yu4quDS3pUkh7U6BgAc2JcAx561LY
