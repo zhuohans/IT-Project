@@ -4,8 +4,8 @@ const db = mysql.createPool({
   connectionLimit: 10,  
   host: 'localhost',  
   user: 'root',  
-  password: 'solstice',  
-  database: 'db_plants_app'  
+  password: 'hq031224',
+  database: 'it_project'
 });  
   
 const query = async (sql, values = []) => {  
