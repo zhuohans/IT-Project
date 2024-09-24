@@ -56,8 +56,7 @@ drop table if exists events;
 create table events (
   id int not null auto_increment,
   user_id int not null comment 'event created user id',
-  title varchar(300) not null comment 'event title',
-  content varchar(500) not null comment 'event content',
+  name varchar(300) not null comment 'event name',
   notified_datetime datetime not null comment 'event notified date time',
   created_at datetime not null default now() comment 'created date time',
   primary key (id),

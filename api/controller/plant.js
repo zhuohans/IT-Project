@@ -5,11 +5,11 @@ const router = express.Router();
 const plantService = require("../service/plant");
 
 const result = (code = 500, msg = "", data = {}) => {
-    return {
-        code: code,
-        msg: msg,
-        data: data
-    };
+  return {
+    code: code,
+    msg: msg,
+    data: data
+  };
 };
 
 
@@ -35,7 +35,7 @@ router.post("/create", upload.single('image'), async (req,res) => {
   try {
     const plant = { ...req.body };
     const file = req.file;
-    const filePath = path.join('..', file.path).replace(/\\/g, '/');
+    const filePath = file.path.replace(/\\/g, '/').split("public")[1];
     plant.plant_image = filePath;
     console.log("plant: ", plant);
     await plantService.insertPlant(plant);
@@ -57,8 +57,11 @@ router.get("/list", async (req, res) => {
  * Get plant detail by id
  */
 router.get("/:id", async (req, res) => {
-  const plant = await plantService.getPlantById(req.params.id);
-  return res.json(result(code=200, msg="ok", { plant }));
+  const plants = await plantService.getPlantById(req.params.id);
+  if (plants && plants.length > 0) {
+    return res.json(result(code=200, msg="ok", { plant: plants[0] }));
+  }
+  return res.json(result(code=404, msg="Not found plant"));
 });
 
 /**

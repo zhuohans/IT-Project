@@ -1,7 +1,7 @@
 const db = require("../../db");
 
 const getEventByCreator = async (creatorId) => {
-  const sql = "select * from events where user_id = ?"
+  const sql = "select * from events where user_id = ? order by notified_datetime desc";
   return await db.query(sql, [creatorId]);
 }
 

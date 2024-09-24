@@ -18,9 +18,9 @@ router.post("/create", async (req,res) => {
     const event = { ...req.body, user_id: req.user.userid };
     console.log("event: ", event);
     await eventService.insertEvent(event);
-    return res.json(result(code=201, msg="ok"));
+    return res.json(result(code=200, msg="ok"));
   } catch (error) {
-    return res.json(result(msg=error));
+    return res.json(result(code=500, msg=error));
   }
 });
 

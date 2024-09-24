@@ -2,10 +2,10 @@ const mysql = require('mysql2/promise');
   
 const db = mysql.createPool({  
   connectionLimit: 10,  
-  host: 'localhost',  
+  host: '127.0.0.1',  
   user: 'root',  
-  password: 'solstice',  
-  database: 'db_plants_app'  
+  password: '780198',  
+  database: 'gardening_advice'  
 });  
   
 const query = async (sql, values = []) => {  

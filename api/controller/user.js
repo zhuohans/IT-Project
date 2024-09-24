@@ -21,20 +21,22 @@ const result = (code = 500, msg = "", data = {}) => {
  router.post('/register', async (req, res) => {
   const data = req.body;
   let user = await userService.getUserByUsername(data.username);
-  console.log("user: ", user);
+  // console.log("user: ", user);
   if (user && user.length > 0) {
-    return res.json(result(msg = "The user name has already exist."));
+    return res.json(result(code=500, msg = "The user name has already exist."));
   }
   user = await userService.getUserByEmail(data.email);
   if (user.length > 0) {
-    return res.json(result(msg = "The email has already exist."));
+    return res.json(result(code=500, msg = "The email has already exist."));
   }
   try {
+    // set the default user avatar
+    data.avatar = "/avatar/avatar.jpeg"
     data.password = encript(data.password);
     await userService.insertUser(data);
     return res.json(result(code=200, msg="ok"));
   } catch (e) {
-    return res.json(result(msg = e));
+    return res.json(result(code=500, msg = e));
   }
 });
 
@@ -43,7 +45,7 @@ const result = (code = 500, msg = "", data = {}) => {
  */
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const returnResult = result(msg="User name or password is incorrect");
+  const returnResult = result(code= 500, msg="User name or password is incorrect");
   const users = await userService.getUserByUsername(username);
   if (users.length > 0) {
     const user = users[0];
@@ -58,7 +60,7 @@ router.post('/login', async (req, res) => {
         };
     }
   }
-
+  console.log(returnResult);
   return res.json(returnResult);
 });
 
@@ -71,7 +73,7 @@ router.put('/edit', async (req, res) => {
   let users = await userService.getUserByUsername(currentUser.username);
   console.log(currentUser, users);
   if (users.length == 0) {
-    return res.json(result(msg = "The user does not exist."));
+    return res.json(result(code=500, msg = "The user does not exist."));
   }
   let updateMap = {};
   if (data.age) {
@@ -91,10 +93,10 @@ router.put('/edit', async (req, res) => {
     { id: users[0].id } 
   ); 
   if (!updatedUser) {
-    return res.json(result(msg = "Update profile failed."));
+    return res.json(result(code=500, msg="Update profile failed."));
   }
 
-  return res.json(result(200, "ok", "Update profile successfully."));
+  return res.json(result(code=200, msg="Update profile successfully."));
 });
 
 /**
@@ -104,37 +106,38 @@ router.put('/resetPassword', async (req, res) => {
   const currentUser = req.user;
   const users = await userService.getUserByUsername(currentUser.username);
   if (users.length == 0) {
-    return res.json(result(msg = "The user does not exist."));
+    return res.json(result(code=500, msg = "The user does not exist."));
   }
   const user = users[0];
   const encriptPwd = encript(req.body.password);
   if (encriptPwd != user.password) {
-    return res.json(result(msg = "Your original password is invalid."));
+    return res.json(result(code=500, msg = "Your original password is invalid."));
   }
   // ensure the new password is not the same to the previous password
   const newEncriptedPwd = encript(req.body.newPassword);
   if (newEncriptedPwd == user.password) {
-    return res.json(result(msg = "Your new password is same to your original password."));
+    return res.json(result(code=500, msg = "Your new password is same to your original password."));
   }
   
   const updatedUser = await userService.updateUser({ password: newEncriptedPwd }, { id: user.id }); 
   // console.log("update: ", updatedUser);
   if (!updatedUser) {
-    return res.json(result(msg = "Reset password failed."));
+    return res.json(result(code=500, msg="Reset password failed."));
   }
 
-  return res.json(result(200, "ok", "Reset password successfully."));
+  return res.json(result(code=200, msg="Reset password successfully."));
 });
 
 /**
  * Get user profile
  */
 router.get("/profile", async (req, res) => {
+  console.log("user: ",req.user);
   const users = await userService.getUserByUsername(req.user.username);
   if (users.length > 0) {
     let user = users[0];
     delete user['password'];
-    return res.json(result(code=200, msg="ok", data=user));
+    return res.json(result(code=200, msg="ok", { user }));
   }
   return res.json(result(msg="Fetch user profile failed."));
 });
@@ -145,7 +148,7 @@ router.get("/profile", async (req, res) => {
  */
 const storage = multer.diskStorage({  
   destination: function (req, file, cb) {  
-      cb(null, 'public/uploads/');  
+      cb(null, 'public/uploads/avatar');  
   },  
   filename: function (req, file, cb) {  
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);  
@@ -165,7 +168,7 @@ async function checkFileExists(filePath) {
   }  
 } 
 const upload = multer({ storage: storage }); 
-router.post('/upload', upload.single('avatar'), async (req, res) => {  
+router.post('/avatar/upload', upload.single('avatar'), async (req, res) => {  
   const currentUser = req.user;
   const users = await userService.getUserByUsername(currentUser.username);
   const file = req.file;  
@@ -177,10 +180,10 @@ router.post('/upload', upload.single('avatar'), async (req, res) => {
     if (await checkFileExists(avatarPath)) {
       await fs.unlink(avatarPath);
     } 
-    const filePath = path.join('..', file.path).replace(/\\/g, '/'); 
+    const filePath = file.path.replace(/\\/g, '/').split("public")[1]; 
     const updateUser = await userService.updateUser({ avatar: filePath }, { id: users[0].id });
     if (!updateUser) {
-      return res.json(result(msg="Upload avatar failed."));
+      return res.json(result(code=500, msg="Upload avatar failed."));
     }
   }
   return res.json(result(code=200, msg="Upload avatar successfully."));

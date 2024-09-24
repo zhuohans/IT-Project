@@ -42,8 +42,11 @@ app.use(expressJwt({
       "/api/user/register", 
       "/api/plants/list",
       "/api/posts/list",
+      "/api/categories/list",
       new RegExp('^/api/plants/\\d+$'),
       new RegExp('^/api/plants/listByCategory/\\d+$'),
+      new RegExp('^/api/posts/\\d+$'),
+      new RegExp('^/api/posts/comments/\\d+$'),
     ] // Add routes that do not require token authentication
 }));
 

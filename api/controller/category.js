@@ -29,7 +29,7 @@ const result = (code = 500, msg = "", data = {}) => {
 router.get("/list", async (req, res) => {
   const categories = await categoryService.getCategories();
   if (categories.length > 0) {
-    return res.json(result(code=200, msg="ok", data=categories));
+    return res.json(result(code=200, msg="ok", { categories }));
   }
   return res.json(result(msg="Fetch plant categories failed."));
 });

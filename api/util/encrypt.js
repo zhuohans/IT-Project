@@ -8,7 +8,7 @@ const { TOEKN_SECRET } = require("../util/constants");
  * @param {*} time 
  */
 const sign = (data, time = 3600 * 24 * 1) => {
-    const token = 'Bearer ' + jwt.sign(data, TOEKN_SECRET, { expiresIn: time });
+    const token = jwt.sign(data, TOEKN_SECRET, { expiresIn: time });
     return token;
 };
 

@@ -3,13 +3,14 @@ const multer = require('multer');
 const path = require('path');
 const router = express.Router();
 const postService = require("../service/post");
+const postCommentService = require("../service/postComment");
 
 const result = (code = 500, msg = "", data = {}) => {
-    return {
-        code: code,
-        msg: msg,
-        data: data
-    };
+  return {
+    code: code,
+    msg: msg,
+    data: data
+  };
 };
 
 
@@ -32,20 +33,21 @@ const upload = multer({ storage: storage });
  * Add plant
  */
 router.post("/create", upload.array('images'), async (req,res) => {
-  try {
-    const post = { ...req.body, creator_id: req.user.userid };
-    let imagePaths = [];
-    const files = req.files;
-    if (files && files.length > 0) {
-      for (const file of files) {
-        const filePath = path.join('..', file.path).replace(/\\/g, '/');
-        imagePaths.push(filePath);
-      }
+  const post = { ...req.body, creator_id: req.user.userid };
+  let imagePaths = [];
+  const files = req.files;
+  console.log("files: ", files);
+  if (files && files.length > 0) {
+    for (const file of files) {
+      const filePath = file.path.replace(/\\/g, '/').split("public")[1];
+      imagePaths.push(filePath);
     }
-    // plant.plant_image = filePath;
-    // console.log("plant: ", plant);
-    const returnPost = await postService.insertPost(post, imagePaths);
-    return res.json(result(code=201, msg="ok", { returnPost }));
+  }
+  // plant.plant_image = filePath;
+  // console.log("plant: ", plant);
+  const returnPost = await postService.insertPost(post, imagePaths);
+  return res.json(result(code=200, msg="ok", { returnPost }));
+  try {
   } catch (error) {
     return res.json(error);
   }
@@ -60,19 +62,28 @@ router.get("/list", async (req, res) => {
 });
 
 /**
- * Get plant detail by id
+ * Get post detail by id
  */
 router.get("/:id", async (req, res) => {
-  const plant = await plantService.getPlantById(req.params.id);
-  return res.json(result(code=200, msg="ok", { plant }));
+  const post = await postService.getPostById(req.params.id);
+  return res.json(result(code=200, msg="ok", { post }));
 });
 
 /**
- * Get all plants under one category
+ * Create post comment
  */
-router.get("/listByCategory/:categoryId", async (req, res) => {
-  const plants = await plantService.getPlantsByCategory(req.params.categoryId);
-  return res.json(result(code=200, msg="ok", { plants }));
+router.post("/:id/comment", async (req, res) => {
+  const comment = { ...req.body, post_id: req.params.id, comment_user_id: req.user.userid };
+  await postCommentService.insertPostComment(comment);
+  return res.json(result(code=200, msg="ok"));
+});
+
+/**
+ * Get post comments by post id
+ */
+router.get("/comments/:id", async (req, res) => {
+  const comments = await postCommentService.getPostComments(req.params.id);
+  return res.json(result(code=200, msg="ok", { comments }));
 });
 
 module.exports = router;
