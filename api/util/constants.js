@@ -1,0 +1,3 @@
+const TOEKN_SECRET = "secret12345";
+
+exports.TOEKN_SECRET = TOEKN_SECRET;
