@@ -1,0 +1,32 @@
+server:
+  port: 8835
+
+spring:
+  mvc:
+    servlet:
+      path: /pcs/system
+  profiles:
+    active: auth,database
+  mail:
+    host: smtp.qq.com
+    # Service Agreement
+    protocol: smtp
+    # Encoding Set
+    default-encoding: UTF-8
+    # Account to send mail from
+    username: 1655447052@qq.com
+    # Authorization Code
+    password: wmjucpizwhgweejd
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
