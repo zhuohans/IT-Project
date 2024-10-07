@@ -12,7 +12,7 @@ public class AmapUtil {
     private static final String key = "";
 
     /**
-     * 根据ip获取位置信息
+     * Get location info based on IP
      */
     public static Map<String, Object> getGeoLocation(String ip) {
         RestTemplate restTemplate = new RestTemplate();
@@ -27,11 +27,11 @@ public class AmapUtil {
     public static Object getWeatherByIp(String ip) {
         Map<String, Object> geoLocation = getGeoLocation(ip);
         if (!StrUtil.equals(MapUtil.getStr(geoLocation,"status"),"1")) {
-            throw new RuntimeException("获取天气信息失败");
+            throw new RuntimeException("Getting weather information failed");
         }
         Map<String, Object> weather = getWeatherByAcode(MapUtil.getStr(geoLocation, "adcode"));
         if (!StrUtil.equals(MapUtil.getStr(weather,"status"),"1")){
-            throw new RuntimeException("获取天气信息失败");
+            throw new RuntimeException("Getting weather information failed");
         }
         return weather.get("lives");
     }

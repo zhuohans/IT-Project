@@ -1,6 +1,7 @@
 package com.haste.yzx.common;
 
 /**
+ * @Description
  */
 public class Constants {
     public static final int ACT_DEL = 1;

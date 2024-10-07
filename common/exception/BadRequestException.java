@@ -3,7 +3,7 @@ package com.haste.yzx.common.exception;
 import lombok.Getter;
 
 /**
- * 自定义异常
+ * Bad request exception defined
  */
 @Getter
 public class BadRequestException extends RuntimeException{
