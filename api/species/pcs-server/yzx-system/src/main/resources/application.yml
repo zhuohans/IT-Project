@@ -1,0 +1,32 @@
+server:
+  port: 8835
+
+spring:
+  mvc:
+    servlet:
+      path: /pcs/system
+  profiles:
+    active: database
+  mail:
+    host: smtp.qq.com
+    #服务协议
+    protocol: smtp
+    # 编码集
+    default-encoding: UTF-8
+    #发送邮件的账户
+    username: 1655447052@qq.com
+    #授权码
+    password: wmjucpizwhgweejd
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
