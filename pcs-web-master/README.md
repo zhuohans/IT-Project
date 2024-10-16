@@ -1,5 +1,5 @@
-## vue脚手架
-### 项目配置
+
+### Project configuration
 * tailwindcss
 * prettier
 * axios
