@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://122.9.135.177:3306/pcs?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: Allen@rhy_2021#825
+    hikari:
+      connection-timeout: 10000
+      validation-timeout: 3000
+      idle-timeout: 60000
+      login-timeout: 5
+      max-lifetime: 60000
+      maximum-pool-size: 100
+      minimum-idle: 5
+  data:
+    redis:
+      database: 1
+      host: 122.9.135.177
+      port: 6379
+      timeout: 10s
+      lettuce:
+        pool:
+          max-active: 100
+          max-wait: -1ms
+          max-idle: 10
+          min-idle: 0
+      password: Allen@rhy&0825#21
+decorator:
+  datasource:
+    p6spy:
+      # log format
+      log-format: "\ntime:%(executionTime) || sql:%(sql)\n"
+      # customise log class
+      logging: custom
+      custom-appender-class: com.haste.yzx.system.config.MpLog
