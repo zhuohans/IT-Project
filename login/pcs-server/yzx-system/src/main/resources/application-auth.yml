@@ -1,0 +1,31 @@
+sa-token:
+  # token 有效期（单位：秒） 默认30天，-1 代表永久有效
+  #  timeout: 43200
+  # 可以自动续期的token，误操作多久会过期
+  active-timeout: 43200
+  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+  is-share: true
+  # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: true
+  jwt-secret-key: 626972AE8B057DD3A3D2914A7C1210B2
+  token-name: yzxToken
+
+# 配置不能带全局请求前缀
+whitelist:
+  urls:
+    - /**/user/login
+    - /auth/user/login/verification/code
+    - /**/user/register
+    - /v3/api-docs/**
+    - /swagger-ui/**/*.*
+    - /favicon.ico
+    - /webjars/**
+    - /*.html
+    - /auth/user/genQr
+
+publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvz8UdLTOtEBx0qQG8ChCxJqzHrpsjKqulFlJbE9qssJTDrXxwaIa5xpTUSyQgveW5SQvzJNVzDHVgPxPrR8O47xNgordPzF2ugz5WrjsH6NY8+VpZKVVW+IbjqH5extMrdWDKGri/CqNDkO00symGa+Ms24wO1CpGwIyexMoinoV7Dl3FIufbCE8XFk1BcBgyg0ZWJMVmNleaESmUI6Jmen92wcLP3XqE22zaCuODqJWi2jT4ePI05KyFQrGE9tD2P8lmTB8BbAXGx42aHAzXVDGSMWefpA6IZRC2148R9+hbEYvseS4JecOfZnjqciZXbkDckoGpl/fFZN3oQIo/wIDAQAB
+privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/PxR0tM60QHHSpAbwKELEmrMeumyMqq6UWUlsT2qywlMOtfHBohrnGlNRLJCC95blJC/Mk1XMMdWA/E+tHw7jvE2Cit0/MXa6DPlauOwfo1jz5WlkpVVb4huOofl7G0yt1YMoauL8Ko0OQ7TSzKYZr4yzbjA7UKkbAjJ7EyiKehXsOXcUi59sITxcWTUFwGDKDRlYkxWY2V5oRKZQjomZ6f3bBws/deoTbbNoK44OolaLaNPh48jTkrIVCsYT20PY/yWZMHwFsBcbHjZocDNdUMZIxZ5+kDohlELbXjxH36FsRi+x5Lgl5w59meOpyJlduQNySgamX98Vk3ehAij/AgMBAAECggEAHRdKVEpgmviml8UNrSBir6dckdMHygn4jmZajdgywchffABfKvYuo3LUs6dUwCdLU8XCY5sR1QLLmFhJAmuUBz5QiAf5ibBLgBeTIqK4gEOHt2nxMzcXGef2CydGXNyVOGgfEFnZ90O9uyq/acVpisSyYWTkf1FQt+QIq8IJS67sydAn3RAd2J4xcQa5VO3HfNd7ev8pu5bAyl85WeeT6Gn/DO4Mi11tyS+8JUIMS4qm3rPGXcjaZtzb7dCjSUy6GizvOIsqBbdfmYU8hx38Y6r3zkyEbjSQO4zAJdCL3Ac6zeAbgyV02lLFDGFl7rml1uO7Z0g/HOLDzp9G46ChCQKBgQDGdaBQeZv+N67VmPLvfcDmHofd3W8Y7qbBoD/00ggxtZvi8XyvTfR463GeobpxNF1/A7+ED1/xLnTcBvb4XYsccpaYT0ORY/n90YIJaiQPCG2ZTjekL7kQnFrfchJ+ELS8m3ccGhWNklljxyzgFBUiwgrQfPCJXEby4LK0zZDLJQKBgQD2shLa0a98AH77n1C+LtXkqNMpY+jhJIXbINFrE9PtHcC6Gh+sg+5ytPPNxW90e2JWU6TDxu2I6ynvxMXwvaGmkWUm6uapbynn22W71wUmhfOzgeC5csrF+7xp16Ykw90j6GKR+0RkzDZYvUvnqvl6I1tZX+3N/z6TrdOmvCNcUwKBgDaJuKak5MN11ewI/inmaw5SMZA8+/zkCJuJSEolNe9DMzWom1UpnRdlzHGFjFDzzQXMp+LIvtruo1qb517VhhcpPk1Y6v6XdOnVm2Cu9H3VGRlaL1xFaRwxe5+QH5jZSnHSX2cvm+Ct6TbMU364xh4pKQOmcguteingqfuZykKpAoGBAL3OlSM3YkWOPCVtlro9XuTn4FBgRrWzXCoVPguc3dn6omaN4wDhIX2wLEWOOwrsQ+UXxhW74NcP2NxaEdIAlXeLNsCSy5ZhqWRzMfssnRHeznq22yjUYZ+i6HynJ3XyHRubmPuo0B6d4NK2EsjUi86llYtWe6mbUZJelBIdfzdxAoGBAIGrI97ypiNNmbSGoh7Ch3NkTFBrv83s2y1br5VxuhA2nrK4uN/DgcjHnA2H1nVbrAedqD19zMTgJSe7thGqeemIRJJmybG+l/S5Sdbpi+/1S/TJbpJbEmVWQSSI56O7/3xzwYtbcTm7qFjN0L1ZlZgKGrl93GHc8jE03VZ6hgKc
