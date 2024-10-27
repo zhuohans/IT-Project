@@ -38,16 +38,18 @@ A live address of the project is available <http://139.9.241.37:8837>.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/example/pcs-server.git
+   git clone https://github.com/zhuohans/IT-Project.git
    ```
 
 2. Install the required dependencies:
 
    ```bash
-   cd pcs-server
+   cd IT-Project/login/pcs-server
    mvn clean
    mvn package
    ```
+
+   Repeat steps 2 and 3 under the Backend section for each module as needed (e.g., `remind/pcs-server`, `species/pcs-server`, etc.).
 
 3. Run the application:
 
@@ -60,12 +62,13 @@ A live address of the project is available <http://139.9.241.37:8837>.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/example/pcs-web.git
+   git clone https://github.com/zhuohans/IT-Project.git
    ```
 
 2. Install the required dependencies:
 
    ```bash
+   cd IT-Project/pcs-web-master
    pnpm install
    ```
 
