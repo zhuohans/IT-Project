@@ -22,17 +22,17 @@ public class CommonUtil {
     }
 
     /**
-     * 验证手机号码是否有效。
+     * Verify phone number
      *
-     * @param phoneNumber 要验证的手机号码
-     * @return 如果手机号码有效返回true，否则返回false
+     * @param phoneNumber 
+     * @return if valid, return true，else, return false
      */
     public static Boolean isValidPhoneNumber(String phoneNumber) {
-        // 定义中国大陆手机号码的正则表达式
-        String regex = "^\\+86(1[3-9]\\d{9})$";
+        // Expression for Australian phone number
+        String regex = "^\\+61\\d{9}$";
         Pattern pattern = Pattern.compile(regex);
 
-        // 使用matcher方法来匹配手机号码
+        // Using matcher to match phone number
         return pattern.matcher(phoneNumber).matches();
     }
 

@@ -10,11 +10,7 @@ import com.haste.yzx.system.api.service.user.IUserPageService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-/**
- * @Description
- * @Author: zhaohf
- * @Date: 2024/9/26
- */
+
 @Service
 public class UserPageServiceImpl implements IUserPageService {
 

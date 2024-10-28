@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/userpage")
-@Tag(name = "用户主页")
+@Tag(name = "User Homepage")
 public class UserPageController extends BaseUserController {
 
     @Resource
@@ -31,10 +31,10 @@ public class UserPageController extends BaseUserController {
 
     /**
      * @param type
-     * 浏览物种、点赞物种、评论物种都会生成足迹
+     * Browsing species, liking species, and commenting on species will generate footprints
      * @see com.haste.yzx.common.enums.UserActEnum
      */
-    @Operation(summary = "获取足迹列表")
+    @Operation(summary = "Get Footprints List")
     @PostMapping("/footprints/list/{type}")
     public Response<FootprintsRspBo> getFootprintsList(@RequestBody Page page, @PathVariable Integer type) {
         String uid = super.getUserInfo().getUserId();
@@ -44,7 +44,7 @@ public class UserPageController extends BaseUserController {
         return Response.success(userPageService.getFootprintsList(page, uid, type));
     }
 
-    @Operation(summary = "获取相册列表")
+    @Operation(summary = "Get Photos List")
     @PostMapping("/photos/list")
     public Response<SpeciesInfo> getPhotosList(@RequestBody Page page) {
         String uid = super.getUserInfo().getUserId();
@@ -54,7 +54,7 @@ public class UserPageController extends BaseUserController {
         return Response.success(userPageService.getPhotosList(page, uid));
     }
 
-    @Operation(summary = "获取收藏列表")
+    @Operation(summary = "Get Collection List")
     @PostMapping("/collect/list")
     public Response<SpeciesInfo> getCollectList(@RequestBody Page page) {
         String uid = super.getUserInfo().getUserId();
@@ -64,9 +64,9 @@ public class UserPageController extends BaseUserController {
         return Response.success(userPageService.getCollectPhotosList(page, uid));
     }
 
-    @Operation(summary = "我收到的点赞/评论数")
+    @Operation(summary = "Received Likes/Comments Count")
     @PostMapping("/receive/cnt")
-    public Response<CommentPo> getReciveCnt() {
+    public Response<CommentPo> getReceivedCount() {
         String uid = super.getUserInfo().getUserId();
         if (StrUtil.isEmpty(uid)) {
             return Response.error(ResponseEnum.UNAUTHORIZED.code, ResponseEnum.UNAUTHORIZED.msg);
@@ -74,7 +74,7 @@ public class UserPageController extends BaseUserController {
         return Response.success(userPageService.getUserStatisticNum(uid));
     }
 
-    @Operation(summary = "花园list")
+    @Operation(summary = "Garden List")
     @PostMapping("/garden/list")
     public Response<GardenPo> getGardenList() {
         String uid = super.getUserInfo().getUserId();
@@ -84,7 +84,7 @@ public class UserPageController extends BaseUserController {
         return Response.success(gardenService.list(new QueryWrapper<GardenPo>().eq("create_by", uid).orderByAsc("sort")));
     }
 
-    @Operation(summary = "花园add")
+    @Operation(summary = "Add Garden Plant")
     @PostMapping("/garden/add")
     public Response<List<GardenPo>> addGardenPlant(@RequestBody GardenPo gardenPo) {
         String uid = super.getUserInfo().getUserId();
@@ -97,7 +97,7 @@ public class UserPageController extends BaseUserController {
         return Response.success(gardenService.list(new QueryWrapper<GardenPo>().eq("create_by", uid)));
     }
 
-    @Operation(summary = "花园更新")
+    @Operation(summary = "Update Garden Plant")
     @PostMapping("/garden/update")
     public Response<List<GardenPo>> updateGardenPlant(@RequestBody GardenPo gardenPo) {
         String uid = super.getUserInfo().getUserId();
@@ -110,7 +110,7 @@ public class UserPageController extends BaseUserController {
         return Response.success(gardenService.list(new QueryWrapper<GardenPo>().eq("create_by", uid)));
     }
 
-    @Operation(summary = "花园更新")
+    @Operation(summary = "Delete Garden Plant")
     @PostMapping("/garden/delete")
     public Response<List<GardenPo>> deleteGardenPlant(@RequestBody GardenPo gardenPo) {
         String uid = super.getUserInfo().getUserId();
@@ -123,7 +123,7 @@ public class UserPageController extends BaseUserController {
         return Response.success(gardenService.list(new QueryWrapper<GardenPo>().eq("create_by", uid)));
     }
 
-    @Operation(summary = "花园addlist")
+    @Operation(summary = "Add Garden Plant List")
     @PostMapping("/garden/addList")
     public Response<List<GardenPo>> addGardenPlantList(@RequestBody List<GardenPo> gardenPoList) {
         String uid = super.getUserInfo().getUserId();

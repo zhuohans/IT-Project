@@ -6,36 +6,32 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-
-public class SpeciesQueryInfo   {
+public class SpeciesQueryInfo {
 
     private Page page;
 
-
     /**
-     *  名称 eq
+     *  Name (exact match)
      */
     private String name;
 
     /**
-     *  英文名称 eq
+     *  Latin Name (exact match)
      */
     private String latinName;
 
-
     /**
-     *  英文名称 like
+     *  Latin Name (partial match)
      */
     private String latinNameLike;
 
     /**
-     *  花菜树 eq
+     *  Popular Classification (e.g., Flower, Vegetable, Tree) (exact match)
      */
     private Integer popularClassification;
 
     /**
-     *  种植季节 eq
+     *  Planting Season Classification (exact match)
      */
     private Integer seasonClassification;
-
 }

@@ -21,7 +21,7 @@ public class ReminderPo extends BasePo {
 
     private String content;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:00", timezone = "Asia/Shanghai")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:00", timezone = "Australia/Melbourne")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:00", iso = DateTimeFormat.ISO.DATE_TIME)
     private Date time;
 

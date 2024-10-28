@@ -22,93 +22,91 @@ import java.util.Base64;
 
 @RestController
 @RequestMapping("/auth/user")
-@Tag(name = "用户认证服务")
+@Tag(name = "User Authentication Services")
 public class UserController {
 
     @Resource
     private IUserService userService;
 
-    @Operation(summary = "登录")
+    @Operation(summary = "Login")
     @PostMapping("/login")
-    public Response login(@Validated @RequestBody UserBo userBo){
+    public Response login(@Validated @RequestBody UserBo userBo) {
         return Response.success(userService.login(userBo));
     }
 
-    @Operation(summary = "验证码登录")
+    @Operation(summary = "Login via Verification Code")
     @PostMapping("/login/verification/code")
-    public Response loginByVerificationCode(@Validated @RequestBody UserVerificationCodeBo userVerificationCodeBo){
+    public Response loginByVerificationCode(@Validated @RequestBody UserVerificationCodeBo userVerificationCodeBo) {
         return Response.success(userService.verificationCodeLogin(userVerificationCodeBo));
     }
 
-    @Operation(summary = "注册")
+    @Operation(summary = "Register")
     @PostMapping("/register")
-    public Response register(@Validated @RequestBody UserBo userBo){
+    public Response register(@Validated @RequestBody UserBo userBo) {
         userService.register(userBo);
         return Response.success();
     }
 
-    @Operation(summary = "生成二维码")
+    @Operation(summary = "Generate QR Code")
     @GetMapping("/genQr")
-    public Response genQr(@RequestParam String content){
+    public Response genQr(@RequestParam String content) {
         String res = null;
         try {
             BufferedImage bfImg = new QrUtil().buildQrCodeImage(content);
-            // 将 BufferedImage 转换成 byte 数组
+            // Convert BufferedImage to byte array
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bfImg, "png", baos);
             byte[] imageBytes = baos.toByteArray();
 
-            // 使用 Base64 编码
+            // Use Base64 encoding
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
-            // 返回 Base64 字符串
+            // Return Base64 string
             res = "data:image/png;base64," + base64Image;
         } catch (IOException e) {
-            throw new BadRequestException(400,e.getMessage());
+            throw new BadRequestException(400, e.getMessage());
         }
         return Response.success(res);
     }
 
-    @Operation(summary = "发送邮件")
+    @Operation(summary = "Send Email")
     @GetMapping("/send/mail")
-    public Response sendMail(@RequestParam String email){
+    public Response sendMail(@RequestParam String email) {
         userService.sendMail(email);
-
         return Response.success();
     }
 
-    @Operation(summary = "发送注册验证码")
+    @Operation(summary = "Send Registration Verification Code")
     @GetMapping("/send/register/mail")
-    public Response sendRegisterMail(@RequestParam String email){
+    public Response sendRegisterMail(@RequestParam String email) {
         userService.sendRegisterMail(email);
-
         return Response.success();
     }
 
-    @Operation(summary = "重置密码")
+    @Operation(summary = "Reset Password")
     @PostMapping("/reset/password")
-    public Response resetPassword(@RequestBody @Validated ResetPasswordBo resetPasswordBo){
+    public Response resetPassword(@RequestBody @Validated ResetPasswordBo resetPasswordBo) {
         userService.resetPassword(resetPasswordBo);
         return Response.success();
     }
 
-    @Operation(summary = "获取用户详情")
+    @Operation(summary = "Get User Details")
     @GetMapping("/info")
-    public Response getUserInfo(){
+    public Response getUserInfo() {
         UserPo userPo = userService.getUserInfo();
         return Response.success(userPo);
     }
 
-    @Operation(summary = "修改用户信息")
+    @Operation(summary = "Update User Information")
     @PostMapping("/update")
-    public Response updateUserInfo(@RequestBody UserPo userPo){
+    public Response updateUserInfo(@RequestBody UserPo userPo) {
         userService.updateUserInfo(userPo);
         return Response.success();
     }
 
-    @Operation(summary = "修改用户密码")
+    @Operation(summary = "Change User Password")
     @PostMapping("/change/password")
-    public Response changePassword(@RequestBody UserBo userBo){
+    public Response changePassword(@RequestBody UserBo userBo) {
         userService.changePassword(userBo);
         return Response.success();
     }

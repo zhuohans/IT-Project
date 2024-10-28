@@ -12,26 +12,32 @@ public class AmapUtil {
     private static final String key = "";
 
     /**
-     * 根据ip获取位置信息
+     * Get location information based on IP
      */
     public static Map<String, Object> getGeoLocation(String ip) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(locationApi+ip, Map.class);
+        return restTemplate.getForObject(locationApi + ip, Map.class);
     }
 
+    /**
+     * Get weather information based on area code
+     */
     public static Map<String, Object> getWeatherByAcode(String acode) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(weatherApi+acode, Map.class);
+        return restTemplate.getForObject(weatherApi + acode, Map.class);
     }
 
+    /**
+     * Get weather information based on IP
+     */
     public static Object getWeatherByIp(String ip) {
         Map<String, Object> geoLocation = getGeoLocation(ip);
-        if (!StrUtil.equals(MapUtil.getStr(geoLocation,"status"),"1")) {
-            throw new RuntimeException("获取天气信息失败");
+        if (!StrUtil.equals(MapUtil.getStr(geoLocation, "status"), "1")) {
+            throw new RuntimeException("Failed to retrieve weather information");
         }
         Map<String, Object> weather = getWeatherByAcode(MapUtil.getStr(geoLocation, "adcode"));
-        if (!StrUtil.equals(MapUtil.getStr(weather,"status"),"1")){
-            throw new RuntimeException("获取天气信息失败");
+        if (!StrUtil.equals(MapUtil.getStr(weather, "status"), "1")) {
+            throw new RuntimeException("Failed to retrieve weather information");
         }
         return weather.get("lives");
     }

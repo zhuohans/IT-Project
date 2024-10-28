@@ -15,59 +15,39 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("t_pcs_species_info")
-@Tag(name = "物种分类实体")
+@Tag(name = "Species Classification Entity")
 public class SpeciesInfo extends BasePo {
+
     @TableId
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @Schema(description = "物种分类")
+    @Schema(description = "Species Classification")
     private String speciesClassification;
 
-    @Schema(description = "物种名称")
+    @Schema(description = "Species Name")
     private String name;
 
-    @Schema(description = "物种图片路径")
+    @Schema(description = "Species Image Path")
     private String imgPath;
 
-    @Schema(description = "物种描述")
+    @Schema(description = "Species Description")
     private String descp;
 
-    @Schema(description = "生长区域")
+    @Schema(description = "Growth Area")
     private String growthArea;
 
-    @Schema(description = "最佳温度")
+    @Schema(description = "Optimal Temperature")
     private String optimalTemperature;
 
-    @Schema(description = "最佳土壤")
-    private String optimalSoil;
-
-    @Schema(description = "生长时间")
-    private String growthTime;
-
-    @Schema(description = "收获时间")
-    private String harvestTime;
-
-    @Schema(description = "最佳湿度")
-    private String optimalHumidity;
-
-    @Schema(description = "经度")
-    private String lng;
-
-    @Schema(description = "纬度")
-    private String lat;
-
-    @Schema(description = "购买种子的最佳公司")
-    private String bestCompany;
-
-    @Schema(description = "是否可见")
+    @Schema(description = "Is Visible")
     private Integer visible = 0;
 
-    @Schema(description = "状态")
+    @Schema(description = "Status")
     @TableField(value = "`status`", fill = FieldFill.INSERT_UPDATE)
     private Integer status;
 
-    @Schema(description = "排序")
+    @Schema(description = "Sort Order")
     @TableField(fill = FieldFill.INSERT)
     private Integer sort;
 
@@ -76,5 +56,4 @@ public class SpeciesInfo extends BasePo {
     private Integer popularClassification;
 
     private Integer seasonClassification;
-
 }

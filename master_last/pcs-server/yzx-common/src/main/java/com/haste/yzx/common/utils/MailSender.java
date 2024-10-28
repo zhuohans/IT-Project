@@ -20,37 +20,43 @@ public class MailSender {
     @Resource
     private JavaMailSender mailSender;
 
+    /**
+     * Send a simple email
+     */
     public void commonEmail(ToEmail toEmail) {
-        //创建简单邮件消息
+        // Create a simple email message
         SimpleMailMessage message = new SimpleMailMessage();
-        //谁发的
+        // Sender
         message.setFrom(from);
-        //谁要接收
+        // Recipient
         message.setTo(toEmail.getTos());
-        //邮件标题
+        // Email subject
         message.setSubject(toEmail.getSubject());
-        //邮件内容
+        // Email content
         message.setText(toEmail.getContent());
         try {
             mailSender.send(message);
         } catch (MailException e) {
             e.printStackTrace();
-            throw new BadRequestException(400,e.getMessage());
+            throw new BadRequestException(400, e.getMessage());
         }
     }
 
+    /**
+     * Send an HTML email
+     */
     public void htmlEmail(ToEmail toEmail) throws MessagingException {
-        //创建一个MINE消息
+        // Create a MIME message
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper minehelper = new MimeMessageHelper(message, true);
-        //谁发
-        minehelper.setFrom(from);
-        //谁要接收
-        minehelper.setTo(toEmail.getTos());
-        //邮件主题
-        minehelper.setSubject(toEmail.getSubject());
-        //邮件内容   true 表示带有附件或html
-        minehelper.setText(toEmail.getContent(), true);
+        MimeMessageHelper mimeHelper = new MimeMessageHelper(message, true);
+        // Sender
+        mimeHelper.setFrom(from);
+        // Recipient
+        mimeHelper.setTo(toEmail.getTos());
+        // Email subject
+        mimeHelper.setSubject(toEmail.getSubject());
+        // Email content, true indicates attachments or HTML content
+        mimeHelper.setText(toEmail.getContent(), true);
         try {
             mailSender.send(message);
         } catch (MailException e) {

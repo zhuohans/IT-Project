@@ -6,10 +6,12 @@ import lombok.Data;
 
 @Data
 public class ResetPasswordBo {
-    @NotBlank(message = "邮箱不为空")
+    @NotBlank(message = "Email cannot be blank")
     private String email;
-    @NotNull(message = "验证码不为空")
+
+    @NotNull(message = "Verification code cannot be null")
     private Integer code;
-    @NotNull(message = "新密码不为空")
+
+    @NotNull(message = "New password cannot be null")
     private String newPassword;
 }

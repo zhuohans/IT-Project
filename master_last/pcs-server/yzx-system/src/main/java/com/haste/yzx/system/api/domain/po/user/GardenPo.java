@@ -13,31 +13,31 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("t_pcs_garden")
-@Tag(name = "花园")
+@Tag(name = "Garden")
 public class GardenPo extends BasePo {
+    
     @TableId
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-    
-    @Schema(description = "物种id")
+
+    @Schema(description = "Species ID")
     private Long speciesId;
 
-    @Schema(description = "经度")
+    @Schema(description = "Longitude")
     private String lng;
 
-    @Schema(description = "纬度")
+    @Schema(description = "Latitude")
     private String lat;
 
-    @Schema(description = "排序字段")
+    @Schema(description = "Sort Field")
     private Integer sort;
 
-    @Schema(description = "物种图片")
+    @Schema(description = "Species Image")
     private String imgPath;
 
-    @Schema(description = "拉丁名")
+    @Schema(description = "Latin Name")
     private String latinName;
 
-    @Schema(description = "中文名")
+    @Schema(description = "Chinese Name")
     private String cnName;
-
 }

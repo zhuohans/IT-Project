@@ -19,14 +19,14 @@ public class MpAutoFill implements MetaObjectHandler {
         try {
             userId = StpUtil.getLoginId().toString();
         } catch (Exception e) {
-            log.error("获取当前用户失败：{}",e.getMessage());
+            log.error("Failed to get the current user: {}", e.getMessage());
         }
         this.strictInsertFill(metaObject, "createTime", Date.class, currentTime);
         this.strictInsertFill(metaObject, "createBy", String.class, userId);
         this.strictInsertFill(metaObject, "updateTime", Date.class, currentTime);
         this.strictInsertFill(metaObject, "updateBy", String.class, userId);
-        this.strictInsertFill(metaObject,"sort",Integer.class,0);
-        this.strictInsertFill(metaObject,"status",Integer.class,1);
+        this.strictInsertFill(metaObject, "sort", Integer.class, 0);
+        this.strictInsertFill(metaObject, "status", Integer.class, 1);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class MpAutoFill implements MetaObjectHandler {
         try {
             userId = StpUtil.getLoginId().toString();
         } catch (Exception e) {
-            log.error("获取当前用户失败：{}",e.getMessage());
+            log.error("Failed to get the current user: {}", e.getMessage());
         }
         this.strictUpdateFill(metaObject, "updateTime", Date.class, currentTime);
         this.strictUpdateFill(metaObject, "updateBy", String.class, userId);

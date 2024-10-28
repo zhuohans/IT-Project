@@ -28,27 +28,27 @@ public class ReminderController extends BaseUserController {
     @Resource
     ReminderDoingDao reminderDoingDao;
 
-    @Operation(summary = "创建提醒")
+    @Operation(summary = "Create Reminder")
     @PostMapping("/create")
-    public Response create(@RequestBody ReminderPo reminderPo){
-        if(reminderPo.getTime()!=null){
-            reminderPo.setTime(DateTime.of(reminderPo.getTime()).setField(DateField.SECOND,0));
+    public Response create(@RequestBody ReminderPo reminderPo) {
+        if (reminderPo.getTime() != null) {
+            reminderPo.setTime(DateTime.of(reminderPo.getTime()).setField(DateField.SECOND, 0));
         }
         return Response.success(reminderService.create(reminderPo));
     }
 
-    @Operation(summary = "更新提醒")
+    @Operation(summary = "Update Reminder")
     @PostMapping("/update")
-    public Response update(@RequestBody ReminderPo reminderPo){
-        if(reminderPo.getTime()!=null){
-            reminderPo.setTime(DateTime.of(reminderPo.getTime()).setField(DateField.SECOND,0));
+    public Response update(@RequestBody ReminderPo reminderPo) {
+        if (reminderPo.getTime() != null) {
+            reminderPo.setTime(DateTime.of(reminderPo.getTime()).setField(DateField.SECOND, 0));
         }
         return Response.success(reminderService.updateById(reminderPo));
     }
 
-    @Operation(summary = "查询提醒")
+    @Operation(summary = "Get Reminder List")
     @PostMapping("/list")
-    public Response getReminderList(){
+    public Response getReminderList() {
         String uid = this.getUserInfo().getUserId();
         if (uid == null) {
             throw new BadRequestException(ResponseEnum.UNAUTHORIZED.code, ResponseEnum.UNAUTHORIZED.msg);
@@ -56,9 +56,9 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderService.getReminderList(uid));
     }
 
-    @Operation(summary = "查询临期事件")
+    @Operation(summary = "Get Upcoming Events")
     @PostMapping("/list/being")
-    public Response getBeingReminderList(){
+    public Response getBeingReminderList() {
         String uid = this.getUserInfo().getUserId();
         if (StrUtil.isEmpty(uid)) {
             return Response.error(ResponseEnum.UNAUTHORIZED.code, ResponseEnum.UNAUTHORIZED.msg);
@@ -66,43 +66,42 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderService.getReminderListDoing(uid));
     }
 
-    @Operation(summary = "确认临期事件")
+    @Operation(summary = "Confirm Upcoming Event")
     @PostMapping("/being/update/{id}")
-    public Response dealBeingRemind(@PathVariable Long id){
+    public Response dealBeingRemind(@PathVariable Long id) {
         String uid = this.getUserInfo().getUserId();
         if (StrUtil.isEmpty(uid)) {
             return Response.error(ResponseEnum.UNAUTHORIZED.code, ResponseEnum.UNAUTHORIZED.msg);
         }
 
         UpdateWrapper<ReminderDoingPo> wrapper = new UpdateWrapper<>();
-        wrapper.eq("create_by",uid);
-        wrapper.eq("id",id);
-        wrapper.set("status",1);
+        wrapper.eq("create_by", uid);
+        wrapper.eq("id", id);
+        wrapper.set("status", 1);
         return Response.success(reminderDoingDao.update(wrapper));
     }
 
-    @Operation(summary = "一键确认临期事件")
+    @Operation(summary = "One-Click Confirm Upcoming Events")
     @PostMapping("/being/updateAll")
-    public Response dealBeingRemindAll(){
+    public Response dealBeingRemindAll() {
         String uid = this.getUserInfo().getUserId();
         if (StrUtil.isEmpty(uid)) {
             return Response.error(ResponseEnum.UNAUTHORIZED.code, ResponseEnum.UNAUTHORIZED.msg);
         }
 
         UpdateWrapper<ReminderDoingPo> wrapper = new UpdateWrapper<>();
-        wrapper.eq("create_by",uid);
-        wrapper.set("status",1);
+        wrapper.eq("create_by", uid);
+        wrapper.set("status", 1);
         return Response.success(reminderDoingDao.update(wrapper));
     }
 
-    @Operation(summary = "删除提醒")
+    @Operation(summary = "Delete Reminder")
     @PostMapping("/delete/{id}")
-    public Response delete(@PathVariable Long id){
+    public Response delete(@PathVariable Long id) {
         return Response.success(reminderService.delete(id));
     }
 
-
-    @Operation(summary = "创建事件")
+    @Operation(summary = "Create Event")
     @PostMapping("/create/event")
     public void createRemindEvent() {
         System.out.println(new Date());

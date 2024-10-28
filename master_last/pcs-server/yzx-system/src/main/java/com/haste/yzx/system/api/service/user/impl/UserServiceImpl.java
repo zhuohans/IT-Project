@@ -52,10 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserPo> implements IUs
 
     private String REGISTER_KEY_PRE = "register:";
 
-    /**
-    * 1. 解密前端的加密
-    * 2. 后端加密存储
-    */
+
     @Override
     public void register(UserBo userBo) {
         long expire = redisUtil.getExpire(REGISTER_KEY_PRE + userBo.getEmail());
@@ -117,7 +114,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserPo> implements IUs
 
     @Override
     public Map<String, Object> verificationCodeLogin(UserVerificationCodeBo userVerificationCodeBo) {
-        // 校验手机号是否正确
+
         String phoneNo = userVerificationCodeBo.getPhoneNo();
         Boolean isPhoneNumber = CommonUtil.isValidPhoneNumber(phoneNo);
         String code = userVerificationCodeBo.getCode();
@@ -158,7 +155,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserPo> implements IUs
 
     @Override
     public void sendRegisterMail(String email) {
-        System.out.println("执行了");
+        System.out.println("done");
         LambdaQueryWrapper<UserPo> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(UserPo::getEmail,email);
         List<UserPo> list = this.list(wrapper);
@@ -213,27 +210,27 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserPo> implements IUs
 
     @Override
     public void updateUserInfo(UserPo userPo) {
-        // 创建查询构造器
+
         LambdaQueryWrapper<UserPo> wrapper = new LambdaQueryWrapper<>();
 
-        // 验证邮箱是否唯一
+
         wrapper.eq(UserPo::getEmail, userPo.getEmail());
         long emailCount = this.count(wrapper);
         if (emailCount > 0 && (userPo.getUserId() == null || !this.getById(userPo.getUserId()).getEmail().equals(userPo.getEmail()))) {
             throw new BadRequestException(ResponseEnum.USER_EXISTS.code, ResponseEnum.USER_EXISTS.msg);
         }
 
-        // 清除之前的条件，避免影响后续查询
+
         wrapper.clear();
 
-        // 验证用户名是否唯一
+
         wrapper.eq(UserPo::getUsername, userPo.getUsername());
         long usernameCount = this.count(wrapper);
         if (usernameCount > 0 && (userPo.getUserId() == null || !this.getById(userPo.getUserId()).getUsername().equals(userPo.getUsername()))) {
             throw new BadRequestException(ResponseEnum.USER_EXISTS.code, ResponseEnum.USER_EXISTS.msg);
         }
 
-        // 如果通过了验证，则可以安全地更新用户信息
+
         this.updateById(userPo);
     }
 

@@ -14,22 +14,23 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("t_pcs_species_comment")
-@Tag(name = "物种评论实体")
+@Tag(name = "Species Comment Entity")
 public class CommentPo extends BasePo {
+    
     @TableId
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @Schema(description = "评论")
+    @Schema(description = "Comment")
     private String comment;
 
-    @Schema(description = "物种id")
+    @Schema(description = "Species ID")
     private Long speciesId;
 
-    @Schema(description = "祖id")
+    @Schema(description = "Ancestor ID")
     private Long ancestors;
 
-    @Schema()
+    @Schema(description = "Views")
     private Integer vieww;
 
     @TableField(exist = false)

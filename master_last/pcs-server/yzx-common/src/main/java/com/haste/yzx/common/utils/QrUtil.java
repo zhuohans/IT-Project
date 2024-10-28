@@ -15,36 +15,36 @@ import java.util.Hashtable;
 
 @Slf4j
 public class QrUtil {
-    //二维码宽度
+    // QR code width
     private static final int QRCODE_SIZE = 430;
-    //编码
+    // Encoding
     private static final String CHARSET = "utf-8";
-    // 二维码绘制高度偏移量，留出空间写文字描述二维码信息
+    // QR code drawing height offset, reserved space for writing text description of the QR code
     private static final int OFFSET_HEIGHT = 25;
-    //二维码标题字体
-    private static final String TITLE_FONT = "黑体";
-    //标题前缀
-    private static final String TITLE_PREFIX = "编号：";
+    // QR code title font
+    private static final String TITLE_FONT = "SansSerif";
+    // Title prefix
+    private static final String TITLE_PREFIX = "ID: ";
 
     /**
-     * 生成二维码.
+     * Generate QR code.
      *
-     * @param content 内容
-     * @return 图片
+     * @param content Content
+     * @return Image
      */
     public BufferedImage buildQrCodeImage(String content) {
         return createImage(content, content);
     }
 
     /**
-     * 生成二维码.
+     * Generate QR code.
      *
-     * @param content 扫描成功的内容
-     * @param title 二维码标题
-     * @return 二维码图片
+     * @param content Scanned content
+     * @param title   QR code title
+     * @return QR code image
      */
     private BufferedImage createImage(String content, String title) {
-        //等同于hashmap,hashtable是线程安全的
+        // Hashtable is thread-safe, similar to HashMap
         Hashtable hints = new Hashtable();
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
@@ -54,8 +54,8 @@ public class QrUtil {
         try {
             bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE, hints);
         } catch (WriterException e) {
-            log.error("生成二维码异常了..content【{}】", content, e);
-            throw new RuntimeException("生成二维码信息异常，请稍后重试");
+            log.error("Error generating QR code.. content [{}]", content, e);
+            throw new RuntimeException("Error generating QR code. Please try again later.");
         }
 
         int width = bitMatrix.getWidth();
@@ -66,35 +66,35 @@ public class QrUtil {
                 image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
             }
         }
-        log.info("生成二维码成功！");
-        //有标题，合成带标题的二维码
+        log.info("QR code generated successfully!");
+        // If there is a title, combine it with the QR code and title
         if (StrUtil.isNotBlank(title)) {
             return drawDetailForQR(image, title);
         }
-        //直接返回生成的二维码
+        // Directly return the generated QR code
         return image;
     }
 
     /**
-     * 绘制二维码描述信息.
+     * Draw QR code description.
      *
-     * @param source 源二维码图片
-     * @param title  二维码标题
-     * @return 合成后的图片
+     * @param source The source QR code image
+     * @param title  QR code title
+     * @return The combined image
      */
     private BufferedImage drawDetailForQR(BufferedImage source, String title) {
-        //新建模板图片
+        // Create a new template image
         BufferedImage bufferedImage = new BufferedImage(QRCODE_SIZE, QRCODE_SIZE + OFFSET_HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bufferedImage.createGraphics();
-        //绘制矩形背景
+        // Draw rectangular background
         graphics.setColor(Color.white);
         graphics.fillRect(0, 0, QRCODE_SIZE, OFFSET_HEIGHT);
-        //绘制描述信息
+        // Draw description text
         Font font = new Font(TITLE_FONT, Font.PLAIN, 22);
         graphics.setColor(Color.black);
         graphics.setFont(font);
 //        graphics.drawString(TITLE_PREFIX + title, 20, OFFSET_HEIGHT - 2);
-        //绘制二维码
+        // Draw the QR code
         graphics.drawImage(source, 0, OFFSET_HEIGHT, QRCODE_SIZE, QRCODE_SIZE, null);
         graphics.dispose();
         return bufferedImage;

@@ -13,20 +13,19 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("t_pcs_species_like")
-@Tag(name = "点赞收藏实体")
+@Tag(name = "Like and Collect Entity")
 public class LikePo extends BasePo {
+
     @TableId
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-    
-    @Schema(description = "物种id")
+
+    @Schema(description = "Species ID")
     private Long speciesId;
 
-    @Schema(description = "喜欢")
+    @Schema(description = "Like")
     private Integer likee;
 
-    @Schema(description = "收藏")
+    @Schema(description = "Collect")
     private Integer collect;
-
-
 }
