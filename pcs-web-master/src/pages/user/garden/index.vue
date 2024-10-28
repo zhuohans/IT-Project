@@ -104,7 +104,7 @@ const menuY = ref(0)
 const currentClickItem = ref({ index: 0, spot: null })
 
 const showMenu = (event, spot, index) => {
-  // 显示自定义菜单，并设置菜单位置
+
   menuVisible.value = true
   menuX.value = event.pageX
   menuY.value = event.pageY
@@ -112,7 +112,7 @@ const showMenu = (event, spot, index) => {
   currentClickItem.value.spot = spot
 }
 const removeSpecies = (spot, index) => {
-  // 处理点击菜单选项后的逻辑
+
   userApi.deleteGardenSpecies(spot).then((res) => {
     flowerSpots.value[index] = {
       id: 0,
@@ -122,7 +122,7 @@ const removeSpecies = (spot, index) => {
   })
 }
 
-// 创建一个防抖函数
+
 const debouncedGetClassificationList = lodash.debounce((newValue) => {
   current.value++
   initData()
@@ -155,6 +155,7 @@ const onScroll = () => {
 
       <ul class="bg-pcs-species">
         <li
+          v-if="collectList.length > 0"
           v-for="(item, index) in collectList"
           :key="index"
           class="mb-2 card shadow"
@@ -170,6 +171,7 @@ const onScroll = () => {
             {{ item.latinName }}
           </p>
         </li>
+        <li v-else class="text-pcs-primary font-bold text-2xl">No data available.</li>
       </ul>
     </div>
 

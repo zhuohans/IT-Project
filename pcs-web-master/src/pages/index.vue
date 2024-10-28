@@ -243,6 +243,15 @@ const popuCla = ref([
     label: 'Tree',
     children: [],
   },
+  {
+    id: '4',
+    active: false,
+    type: 3,
+    value: 3,
+    title: 'Fruit',
+    label: 'Fruit',
+    children: [],
+  },
 ])
 const currentSelect = ref([-1])
 const pageSize = ref(9999)

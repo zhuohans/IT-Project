@@ -44,11 +44,11 @@ export const groupBy = (array: any, keyExtractor: any) => {
  * @returns 数组中元素的和，类型为number
  */
 export const sum = (array: any, valueExtractor: any) => {
-  // 使用reduce方法从数组中累加值，初始累加器值为0
+
   return array.reduce((accumulator: any, item: any) => {
-    // 使用值提取器函数从当前元素提取数值
+
     const value = valueExtractor(item)
-    // 将提取的值累加到累加器中，并返回累加结果
+
     return accumulator + value
   }, 0)
 }
@@ -105,8 +105,8 @@ export const getMonthDays = (month: number) => {
 export const getFirstDayOfWeek = (month: number) => {
   var now = new Date()
   var year = now.getFullYear()
-  var firstDay = new Date(year, month, 1) // 注意：月份是从0开始的，所以要减1
-  return firstDay.getDay() // 返回的是0-6，0表示周日
+  var firstDay = new Date(year, month, 1)
+  return firstDay.getDay()
 }
 
 export const generateMonthDays = (month: number, dayList: any) => {
@@ -147,11 +147,11 @@ export const validateEmail = (email) => {
   return emailRegex.test(email)
 }
 
-//校验密码是否合规，6-16字符，数字大小写
+
 export const isValidCombination = (str) => {
-  // 定义正则表达式来检查是否包含至少一个大写字母、一个小写字母和一个数字
+
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,16}$/
 
-  // 测试字符串是否符合正则表达式
+
   return regex.test(str)
 }

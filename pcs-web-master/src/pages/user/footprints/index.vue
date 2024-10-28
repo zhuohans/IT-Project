@@ -136,6 +136,7 @@ const closeModal = () => {
 
     <div v-if="!isView">
       <div
+        v-if="footprints?.total > 0"
         v-for="item in footprints?.records"
         class="pt-2 border-b border-solid border-pcs-border pb-2 flex flex-row mt-2"
       >
@@ -197,6 +198,7 @@ const closeModal = () => {
           </p>
         </div>
       </div>
+      <p v-else class="text-pcs-primary font-bold text-2xl">No data available.</p>
     </div>
 
     <dialog ref="speciesDialog" id="speciesDialog" class="modal">

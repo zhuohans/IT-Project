@@ -18,7 +18,7 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
@@ -42,15 +42,15 @@ table {
   border-spacing: 0;
 }
 
-/* Hides scrollbars but still allows scrolling */
+/* 隐藏滚动条但仍允许滚动 */
 .scroll-hidden::-webkit-scrollbar {
-  display: none; /* Browsers for Webkit kernel (e.g. Chrome, Safari) */
+  display: none;
 }
 
-/* provide a default scrollbar style for non-WebKit browsers */
+
 .scroll-hidden {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  overflow: -moz-scrollbars-none; /* Older Firefox browsers */
+  overflow: -moz-scrollbars-none;
 }
 
