@@ -13,28 +13,28 @@ public class SpeciesQueryInfo   {
 
 
     /**
-     *  名称 eq
+     *  Name eq
      */
     private String name;
 
     /**
-     *  英文名称 eq
+     *  Latin name eq
      */
     private String latinName;
 
 
     /**
-     *  英文名称 like
+     *   Latin name like
      */
     private String latinNameLike;
 
     /**
-     *  花菜树 eq
+     *  Popular classification eq
      */
     private Integer popularClassification;
 
     /**
-     *  种植季节 eq
+     *  Planting season eq
      */
     private Integer seasonClassification;
 

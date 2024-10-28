@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 public enum ResponseEnum {
     SUCCESS(200, "success"),
     FAIL(400, "fail"),
-    UNAUTHORIZED(401, "unauthorized"),//未授权
-    FORBIDDEN(403, "forbidden"),//禁止
-    NOT_FOUND(404, "not found"),//未找到
-    INTERNAL_SERVER_ERROR(500, "internal server error"),//服务器内部错误
-    BAD_REQUEST(400, "bad request"),//请求错误
-    UNPROCESSABLE_ENTITY(422, "unprocessable entity"),//数据格式错误
-    UNDEFINED_EXCEPTION(40000,"未定义的错误"),
+    UNAUTHORIZED(401, "unauthorized"),// Unauthorized
+    FORBIDDEN(403, "forbidden"),// Forbidden
+    NOT_FOUND(404, "not found"), // Not found
+    INTERNAL_SERVER_ERROR(500, "internal server error"),// Internal server error
+    BAD_REQUEST(400, "bad request"),// Bad request
+    UNPROCESSABLE_ENTITY(422, "unprocessable entity"),// Data format error
+    UNDEFINED_EXCEPTION(40000,"undefined error"),
     USERNAME_PASSWORD_EXCEPTION(40001,"用户名密码错误"),
     USER_NOT_REGISTER_EXCEPTION(40002,"用户未注册"),
     PASSWORD_FORMAT_ERROR(40003,"密码格式错误"),
