@@ -28,8 +28,8 @@ spring:
 decorator:
   datasource:
     p6spy:
-      # 日志格式
+      # Log Format
       log-format: "\ntime:%(executionTime) || sql:%(sql)\n"
-      # 自定义日志类
+      # Custom log class
       logging: custom
       custom-appender-class: com.haste.yzx.system.config.MpLog

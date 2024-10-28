@@ -9,13 +9,13 @@ spring:
     active: auth,database
   mail:
     host: smtp.qq.com
-    #服务协议
+    # Service Agreement
     protocol: smtp
-    # 编码集
+    # Encoding Set
     default-encoding: UTF-8
-    #发送邮件的账户
+    # Account to send mail from
     username: 1655447052@qq.com
-    #授权码
+    # Authorization Code
     password: wmjucpizwhgweejd
     test-connection: true
     properties:

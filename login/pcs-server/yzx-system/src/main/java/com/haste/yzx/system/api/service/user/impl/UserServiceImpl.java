@@ -53,8 +53,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserPo> implements IUs
     private String REGISTER_KEY_PRE = "register:";
 
     /**
-    * 1. 解密前端的加密
-    * 2. 后端加密存储
+    * 1. Decrypting the encryption on the front end
+    * 2. Backend encrypted storage
     */
     @Override
     public void register(UserBo userBo) {
@@ -117,7 +117,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserPo> implements IUs
 
     @Override
     public Map<String, Object> verificationCodeLogin(UserVerificationCodeBo userVerificationCodeBo) {
-        // 校验手机号是否正确
+        // Verify that the phone number is correct
         String phoneNo = userVerificationCodeBo.getPhoneNo();
         Boolean isPhoneNumber = CommonUtil.isValidPhoneNumber(phoneNo);
         String code = userVerificationCodeBo.getCode();
@@ -213,27 +213,27 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserPo> implements IUs
 
     @Override
     public void updateUserInfo(UserPo userPo) {
-        // 创建查询构造器
+        // Creating a query builder
         LambdaQueryWrapper<UserPo> wrapper = new LambdaQueryWrapper<>();
 
-        // 验证邮箱是否唯一
+        // Verify that the email address is unique
         wrapper.eq(UserPo::getEmail, userPo.getEmail());
         long emailCount = this.count(wrapper);
         if (emailCount > 0 && (userPo.getUserId() == null || !this.getById(userPo.getUserId()).getEmail().equals(userPo.getEmail()))) {
             throw new BadRequestException(ResponseEnum.USER_EXISTS.code, ResponseEnum.USER_EXISTS.msg);
         }
 
-        // 清除之前的条件，避免影响后续查询
+        // Clear previous conditions to avoid affecting subsequent queries
         wrapper.clear();
 
-        // 验证用户名是否唯一
+        // Verify that the username is unique
         wrapper.eq(UserPo::getUsername, userPo.getUsername());
         long usernameCount = this.count(wrapper);
         if (usernameCount > 0 && (userPo.getUserId() == null || !this.getById(userPo.getUserId()).getUsername().equals(userPo.getUsername()))) {
             throw new BadRequestException(ResponseEnum.USER_EXISTS.code, ResponseEnum.USER_EXISTS.msg);
         }
 
-        // 如果通过了验证，则可以安全地更新用户信息
+        // If verified, the user information can be updated securely
         this.updateById(userPo);
     }
 

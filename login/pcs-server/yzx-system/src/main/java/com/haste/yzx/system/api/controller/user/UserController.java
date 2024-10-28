@@ -53,15 +53,15 @@ public class UserController {
         String res = null;
         try {
             BufferedImage bfImg = new QrUtil().buildQrCodeImage(content);
-            // 将 BufferedImage 转换成 byte 数组
+            // Convert a BufferedImage to a byte array
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bfImg, "png", baos);
             byte[] imageBytes = baos.toByteArray();
 
-            // 使用 Base64 编码
+            // Using Base64 encoding
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
-            // 返回 Base64 字符串
+            // Returns a Base64 string
             res = "data:image/png;base64," + base64Image;
         } catch (IOException e) {
             throw new BadRequestException(400,e.getMessage());

@@ -16,8 +16,8 @@ import java.util.Date;
 public class FileInfoUtil {
 
     /**
-     * @param file 文件对象
-     * @param dir  保存的前置路径
+     * @param file File Object
+     * @param dir Prefix path to save
      * @throws IOException
      */
     public static String saveFile(MultipartFile file, String dir, String publishUrlPrefix) throws IOException {
@@ -25,7 +25,7 @@ public class FileInfoUtil {
     }
 
     /**
-     * @param file 文件对象
+     * @param file File Object
      * @throws IOException
      */
     public static String saveFile(MultipartFile file) throws IOException {
@@ -34,10 +34,10 @@ public class FileInfoUtil {
 
 
     /**
-     * @param file     文件对象
-     * @param dir      保存的前置路径
-     * @param fileName 再系统内保存的文件名称
-     * @return 保存文件相关的信息 该对象默认填写了uuid
+     * @param file File Object
+     * @param dir Prefix path to save
+     * @param fileName
+     * @return Save file-related information. The object is filled with uuid by default.
      * @throws IOException
      */
     public static String saveFile(MultipartFile file, String dir, String publishUrlPrefix, String fileName) throws IOException {
@@ -54,14 +54,13 @@ public class FileInfoUtil {
             publishUrlPrefix = Constants.DEFAULT_PUBLISH_PATH;
         }
 
-        String name = file.getOriginalFilename();//真实名称
-        String suffixName = name.substring(name.lastIndexOf("."));//后缀名
-        suffixName = suffixName.toLowerCase(); //后缀名采用小写
+        String name = file.getOriginalFilename();
+        String suffixName = name.substring(name.lastIndexOf("."));
+        suffixName = suffixName.toLowerCase();
 
         String datePath = DateUtil.format(new Date(), "yyyy-MM").replace("-", File.separator);
         String rootFilePath = dir + File.separator + datePath + File.separator;
         String publishUrl = (publishUrlPrefix == null ? "" : publishUrlPrefix) + File.separator + datePath + File.separator;
-        //由于linux系统中可能存在中文文件乱码，所以不使用中文存储
         String fileId = IdUtil.fastSimpleUUID();
         String publishName = DateUtil.format(new Date(), "yyyyMMdd") + "_" + fileId + suffixName;
         File touchFile = cn.hutool.core.io.FileUtil.touch(rootFilePath + publishName);

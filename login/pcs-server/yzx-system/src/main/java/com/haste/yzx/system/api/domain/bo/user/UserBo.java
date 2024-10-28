@@ -5,22 +5,22 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-@Schema(description = "用户业务类")
+@Schema(description = "User service class")
 public class UserBo {
-    @Schema(description = "用户名",required = true)
-    @NotBlank(message = "用户名不为空")
+    @Schema(description = "User name",required = true)
+    @NotBlank(message = "User name is not null")
     private String username;
 
-    @Schema(description = "密码",required = true)
-    @NotBlank(message = "密码不为空")
+    @Schema(description = "Password",required = true)
+    @NotBlank(message = "Password is not null")
     private String password;
 
-    @Schema(description = "性别",required = true)
+    @Schema(description = "Gender",required = true)
     private String gender;
 
-    @Schema(description = "邮箱",required = true)
+    @Schema(description = "Email",required = true)
     private String email;
 
-    @Schema(description = "验证码",required = true)
+    @Schema(description = "Verification Code",required = true)
     private String verCode;
 }

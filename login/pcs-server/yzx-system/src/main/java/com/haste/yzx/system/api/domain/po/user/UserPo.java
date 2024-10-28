@@ -13,80 +13,50 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("t_pcs_sys_user")
-@Tag(name = "用户实体")
+@Tag(name = "User Entity")
 public class UserPo extends BasePo {
     @TableId
     private String userId;
 
-    @Schema(description = "账号")
+    @Schema(description = "Account")
     private String username;
 
-    @Schema(description = "用户名")
+    @Schema(description = "User name")
     private String nickName;
 
-    @Schema(description = "密码")
+    @Schema(description = "Password")
     private String password;
 
-    @Schema(description = "所属应用ID")
+    @Schema(description = "Associated Application ID")
     private String appId;
 
-    @Schema(description = "用户类型(0:普通用户)")
+    @Schema(description = "User Type (0: Regular User)")
     private Integer userType;
 
-    @Schema(description = "过期时间")
+    @Schema(description = "Expiration Time")
     private Date expiredTime;
 
-    @Schema(description = "密码重置时间")
+    @Schema(description = "Password Reset Time")
     private Date pwdResetTime;
 
-    @Schema(description = "性别")
+    @Schema(description = "Gender")
     private String gender;
 
-    @Schema(description = "出生日期")
+    @Schema(description = "Birthday")
     private Date birthday;
 
-    @Schema(description = "年龄")
+    @Schema(description = "Age")
     private Integer age;
 
-    @Schema(description = "籍贯")
-    private String nativePlace;
-
-    @Schema(description = "所在地")
-    private String location;
-
-    @Schema(description = "民族")
-    private String national;
-
-    @Schema(description = "政治面貌")
-    private String politicsStatus;
-
-    @Schema(description = "岗位")
-    private String post;
-
-    @Schema(description = "职称")
-    private String postLevel;
-
-    @Schema(description = "最高学历")
-    private String mostEducation;
-
-    @Schema(description = "毕业学校")
-    private String graduatedSchool;
-
-    @Schema(description = "手机号")
+    @Schema(description = "Phone")
     private String phone;
 
-    @Schema(description = "邮箱")
+    @Schema(description = "Email")
     private String email;
 
-    @Schema(description = "证件类型")
-    private Integer certificateType;
-
-    @Schema(description = "证件号")
-    private String certificateNo;
-
-    @Schema(description = "用户图片")
+    @Schema(description = "Avatar")
     private String avatar;
 
-    @Schema(description = "用户自定义配置")
+    @Schema(description = "User Config")
     private String userConfig;
 }

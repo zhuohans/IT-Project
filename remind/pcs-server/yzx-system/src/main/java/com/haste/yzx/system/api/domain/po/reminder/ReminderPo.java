@@ -21,12 +21,12 @@ public class ReminderPo extends BasePo {
 
     private String content;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:00", timezone = "Asia/Shanghai")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:00", timezone = "Australia/Melbourne")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:00", iso = DateTimeFormat.ISO.DATE_TIME)
     private Date time;
 
     private Integer status = 0;
 
-    @Schema(description = "模式（1：仅一次，2：每天，3：每周，4：每月）")
+    @Schema(description = "Mode (1: only once, 2: daily, 3: weekly, 4: monthly)")
     private Integer model = 1;
 }

@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public Response allException(Exception e) {
-        log.error("未定义的错误：{}，错误详情：{}",e.getCause(),e.getMessage());
+        log.error("Undefined Error: {}, Error details: {}",e.getCause(),e.getMessage());
         String message = e.getMessage();
         Integer code = ResponseEnum.UNDEFINED_EXCEPTION.code;
         return Response.error(code,message);
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = NotLoginException.class)
     public Response notLoginException(NotLoginException e) {
-        log.error("token错误：{}，错误详情：{}",e.getCode(),e.getMessage());
+        log.error("token error: {}, Error details: {}",e.getCode(),e.getMessage());
         String message = e.getMessage();
         Integer code = e.getCode();
         return Response.error(code,message);
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = BadRequestException.class)
     public Response badRequestException(BadRequestException e) {
-        log.error("错误代码：{}，错误详情：{}",e.getCode(),e.getMessage());
+        log.error("Error code: {}, Error details: {}",e.getCode(),e.getMessage());
         String message = e.getMessage();
         Integer code = e.getCode();
         return Response.error(code,message);
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = BadPaddingException.class)
     public Response badRequestException(BadPaddingException e) {
-        log.error("错误代码：{}，错误详情：{}","密码格式错误",e.getMessage());
+        log.error("Error code: {}, Error details: {}","Password format error",e.getMessage());
         String message = e.getMessage();
         Integer code = ResponseEnum.PASSWORD_FORMAT_ERROR.code;
         return Response.error(code,message);
@@ -55,10 +55,10 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = SQLSyntaxErrorException.class)
     public Response handleSQLSyntaxErrorException(SQLSyntaxErrorException e) {
-        log.error("SQL语法错误！", e);
+        log.error("SQL syntax error!", e);
         String message = e.getMessage();
         if (StrUtil.isNotEmpty(message) && message.contains("denied")) {
-            message = "SQL语法错误！";
+            message = "SQL syntax error!";
         }
         return Response.error(message);
     }

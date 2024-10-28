@@ -48,41 +48,11 @@ public class UserPo extends BasePo {
     @Schema(description = "年龄")
     private Integer age;
 
-    @Schema(description = "籍贯")
-    private String nativePlace;
-
-    @Schema(description = "所在地")
-    private String location;
-
-    @Schema(description = "民族")
-    private String national;
-
-    @Schema(description = "政治面貌")
-    private String politicsStatus;
-
-    @Schema(description = "岗位")
-    private String post;
-
-    @Schema(description = "职称")
-    private String postLevel;
-
-    @Schema(description = "最高学历")
-    private String mostEducation;
-
-    @Schema(description = "毕业学校")
-    private String graduatedSchool;
-
     @Schema(description = "手机号")
     private String phone;
 
     @Schema(description = "邮箱")
     private String email;
-
-    @Schema(description = "证件类型")
-    private Integer certificateType;
-
-    @Schema(description = "证件号")
-    private String certificateNo;
 
     @Schema(description = "用户图片")
     private String avatar;

@@ -13,54 +13,54 @@ public class PasswordUtil {
     }
 
     /**
-    * 生成公钥私钥
+    * Generate public and private keys
     */
     public static void generateKeyPair() {
         String publicKeyString = null;
         String privateKeyString = null;
         try {
-            // 生成密钥对
+            // Generate a key pair
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048); // 指定密钥长度
+            keyPairGenerator.initialize(2048); // Specifying the key length
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
-            // 获取公钥和私钥
+            // Get the public and private keys
             PublicKey publicKey = keyPair.getPublic();
             PrivateKey privateKey = keyPair.getPrivate();
 
-            // 将公钥和私钥转换为字符串形式
+            // Convert the public and private keys into strings
             publicKeyString = Base64.getEncoder().encodeToString(publicKey.getEncoded());
             privateKeyString = Base64.getEncoder().encodeToString(privateKey.getEncoded());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        // 打印公钥和私钥字符串
-        System.out.println("公钥：" + publicKeyString);
-        System.out.println("私钥：" + privateKeyString);
+        // Print public and private key strings
+        System.out.println("public: " + publicKeyString);
+        System.out.println("private: " + privateKeyString);
     }
 
     /**
-    * RSA解密
+    * RSA Decryption
     */
     public static String decode(String encodePassword, String privateKey){
         try {
-            // 解码Base64编码的私钥
+            // Decode the Base64 encoded private key
             byte[] privateKeyBytes = Base64.getDecoder().decode(privateKey);
 
-            // 构造PKCS8EncodedKeySpec对象
+            // Constructing a PKCS8EncodedKeySpec object
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
 
-            // 获取RSA算法的密钥工厂
+            // Get the key factory for the RSA algorithm
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 
-            // 生成私钥对象
+            // Generate a private key object
             PrivateKey privateKeyObj = keyFactory.generatePrivate(keySpec);
 
-            // 创建解密器
+            // Creating a decryptor
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.DECRYPT_MODE, privateKeyObj);
 
-            // 解密
+            // Decryption
             byte[] decryptedData = cipher.doFinal(Base64.getDecoder().decode(encodePassword));
 
             return new String(decryptedData, StandardCharsets.UTF_8);

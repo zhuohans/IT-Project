@@ -28,7 +28,7 @@ public class ReminderController extends BaseUserController {
     @Resource
     ReminderDoingDao reminderDoingDao;
 
-    @Operation(summary = "创建提醒")
+    @Operation(summary = "Create a reminder")
     @PostMapping("/create")
     public Response create(@RequestBody ReminderPo reminderPo){
         if(reminderPo.getTime()!=null){
@@ -37,7 +37,7 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderService.create(reminderPo));
     }
 
-    @Operation(summary = "更新提醒")
+    @Operation(summary = "Update reminder")
     @PostMapping("/update")
     public Response update(@RequestBody ReminderPo reminderPo){
         if(reminderPo.getTime()!=null){
@@ -46,7 +46,7 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderService.updateById(reminderPo));
     }
 
-    @Operation(summary = "查询提醒")
+    @Operation(summary = "Query reminder")
     @PostMapping("/list")
     public Response getReminderList(){
         String uid = this.getUserInfo().getUserId();
@@ -56,7 +56,7 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderService.getReminderList(uid));
     }
 
-    @Operation(summary = "查询临期事件")
+    @Operation(summary = "Query upcoming events")
     @PostMapping("/list/being")
     public Response getBeingReminderList(){
         String uid = this.getUserInfo().getUserId();
@@ -66,7 +66,7 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderService.getReminderListDoing(uid));
     }
 
-    @Operation(summary = "确认临期事件")
+    @Operation(summary = "Confirmation of impending events")
     @PostMapping("/being/update/{id}")
     public Response dealBeingRemind(@PathVariable Long id){
         String uid = this.getUserInfo().getUserId();
@@ -81,7 +81,7 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderDoingDao.update(wrapper));
     }
 
-    @Operation(summary = "一键确认临期事件")
+    @Operation(summary = "One-click confirmation of upcoming events")
     @PostMapping("/being/updateAll")
     public Response dealBeingRemindAll(){
         String uid = this.getUserInfo().getUserId();
@@ -95,14 +95,14 @@ public class ReminderController extends BaseUserController {
         return Response.success(reminderDoingDao.update(wrapper));
     }
 
-    @Operation(summary = "删除提醒")
+    @Operation(summary = "Delete reminder")
     @PostMapping("/delete/{id}")
     public Response delete(@PathVariable Long id){
         return Response.success(reminderService.delete(id));
     }
 
 
-    @Operation(summary = "创建事件")
+    @Operation(summary = "Create an event")
     @PostMapping("/create/event")
     public void createRemindEvent() {
         System.out.println(new Date());

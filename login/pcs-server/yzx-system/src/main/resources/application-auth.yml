@@ -1,20 +1,22 @@
 sa-token:
-  # token 有效期（单位：秒） 默认30天，-1 代表永久有效
+  # Token validity period (unit: seconds) The default is 30 days, -1 means permanent validity
   #  timeout: 43200
-  # 可以自动续期的token，误操作多久会过期
+  # How long will it take for a token that can be automatically renewed to expire due to misoperation?
   active-timeout: 43200
-  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  # Whether to allow the same account to log in to multiple locations at the same time
+  # (if true, allow simultaneous logins, if false, new logins will replace old logins)
   is-concurrent: true
-  # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+  # When multiple people log in to the same account, whether to share a token
+  # (if true, all logins share a token, if false, a new token is created for each login)
   is-share: true
-  # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+  # token（uuid、simple-uuid、random-32、random-64、random-128、tik）
   token-style: uuid
-  # 是否输出操作日志
+  # Whether to output operation logs
   is-log: true
   jwt-secret-key: 626972AE8B057DD3A3D2914A7C1210B2
   token-name: yzxToken
 
-# 配置不能带全局请求前缀
+# Configuration cannot have a global request prefix
 whitelist:
   urls:
     - /**/user/login

@@ -21,15 +21,15 @@ public class MailSender {
     private JavaMailSender mailSender;
 
     public void commonEmail(ToEmail toEmail) {
-        //创建简单邮件消息
+        // Creating a simple mail message
         SimpleMailMessage message = new SimpleMailMessage();
-        //谁发的
+        // Who sent
         message.setFrom(from);
-        //谁要接收
+        // Who will receive
         message.setTo(toEmail.getTos());
-        //邮件标题
+        // email subject
         message.setSubject(toEmail.getSubject());
-        //邮件内容
+        // email content
         message.setText(toEmail.getContent());
         try {
             mailSender.send(message);
@@ -40,16 +40,16 @@ public class MailSender {
     }
 
     public void htmlEmail(ToEmail toEmail) throws MessagingException {
-        //创建一个MINE消息
+        //create a MINE message
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper minehelper = new MimeMessageHelper(message, true);
-        //谁发
+        // who sent
         minehelper.setFrom(from);
-        //谁要接收
+        // who will receive
         minehelper.setTo(toEmail.getTos());
-        //邮件主题
+        // email subject
         minehelper.setSubject(toEmail.getSubject());
-        //邮件内容   true 表示带有附件或html
+        // email content  true indicates attachment or html
         minehelper.setText(toEmail.getContent(), true);
         try {
             mailSender.send(message);

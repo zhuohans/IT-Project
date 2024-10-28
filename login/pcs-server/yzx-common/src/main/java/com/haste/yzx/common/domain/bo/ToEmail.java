@@ -5,15 +5,15 @@ import lombok.Data;
 @Data
 public class ToEmail {
     /**
-     * 邮件接收方，可多人
+     * Email recipients can be multiple people
      */
     private String[] tos;
     /**
-     * 邮件主题
+     * Email Subject
      */
     private String subject;
     /**
-     * 邮件内容
+     * Email Content
      */
     private String content;
 }
