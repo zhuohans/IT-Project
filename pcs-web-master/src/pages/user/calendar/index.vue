@@ -21,12 +21,12 @@ const calendarOptions = ref({
     center: 'title',
     right: 'prevYear,prev,next,nextYear today',
   },
-  allDaySlot: false, //隐藏all day
-  editable: false, // 禁止拖动事件
-  eventResizableFromStart: false, // 禁止从事件的开始或结束调整事件大小
+  allDaySlot: false,
+  editable: false,
+  eventResizableFromStart: false,
   height: 600,
-  events: [], //事件事件+文本
-  eventColor: '#378006', //事件背景颜色
+  events: [],
+  eventColor: '#378006',
   eventClick: (info) => {
     console.log(info)
     info.el.style.borderColor = 'red'
@@ -161,8 +161,8 @@ const generateRecurringEvents = (info, modeId, title, id) => {
         eventId: id,
         rrule: {
           freq: 'weekly',
-          dtstart: new Date(currentDate).toISOString(), // 开始日期
-          interval: 1, // 频率间隔
+          dtstart: new Date(currentDate).toISOString(),
+          interval: 1,
         },
       })
       break
@@ -176,8 +176,8 @@ const generateRecurringEvents = (info, modeId, title, id) => {
         eventId: id,
         rrule: {
           freq: 'monthly',
-          dtstart: new Date(currentDate).toISOString(), // 开始日期
-          interval: 1, // 频率间隔// 频率间隔
+          dtstart: new Date(currentDate).toISOString(),
+          interval: 1,
         },
       })
       break

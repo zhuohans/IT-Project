@@ -4,16 +4,16 @@ import router from '@/router'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  timeout: 60000, //超时时间
+  timeout: 60000,
 })
 
 let loadingApp: any
-//配置请求拦截器,在请求之前的数据处理,比如在请求头添加token,所有的请求都会经过拦截器
+
 instance.interceptors.request.use(
-  //config:该参数表示当前请求的配置对象
+
   (config) => {
-    //在请求头统一添加token
-    //或者请求之前显示lodding图标(这里只演示这个)
+
+
     if (config.url != '/pcs/system/reminder/list/being') {
       loadingApp = loading('loading...')
     }

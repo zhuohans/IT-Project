@@ -49,7 +49,7 @@ const eyeClick = () => {
 }
 
 const showAccountTips = ref(true)
-const register = () => {
+const toRegister = () => {
   router.push('/register')
 }
 const toForgotPassword = () => {
@@ -117,7 +117,7 @@ const toForgotPassword = () => {
             </label>
 
             <p
-              class="flex flex-row justify-end w-full text-pcs-primary mt-2 mb-2"
+              class="flex flex-row justify-between w-full text-pcs-primary mt-2 mb-2"
             >
               <span
                 class="flex flex-row gap-x-1 cursor-pointer"
@@ -126,6 +126,7 @@ const toForgotPassword = () => {
                 forgot password
                 <svg-icon type="mdi" :path="mdiAccountQuestion"></svg-icon>
               </span>
+              <span class="cursor-pointer" @click="toRegister">register</span>
             </p>
 
             <button

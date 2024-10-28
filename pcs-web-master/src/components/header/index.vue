@@ -23,14 +23,6 @@ const userClick = () => {
   router.push('/user')
 }
 
-const homeClick = () => {
-  if (route.fullPath == '/home') {
-    router.go(0)
-  } else {
-    router.push('/home')
-  }
-}
-
 const toRegisterPage = () => {
   router.push('/register')
 }
@@ -95,86 +87,68 @@ const toNotice = () => {}
 </script>
 
 <template>
-  <header
-    class="w-full flex flex-row justify-between bg-pcs-primary text-pcs-text-primary pt-2 pb-2"
-  >
-    <div class="flex flex-row items-center">
-      <span class="text-center">
-        <img :src="logo" class="h-10 ml-4" alt="LOGO" />
-      </span>
-    </div>
-
-    <div class="w-full flex flex-row justify-center">
-      <div class="md: w-56 lg:container flex flex-row justify-between">
-        <div class="flex flex-row lg:-ml-14 items-center">
+  <header class="w-full flex flex-row bg-white text-pcs-text-primary pt-2 pb-2">
+    <div class="w-full flex flex-row justify-between">
+      <div class="flex flex-row lg:pl-10 w-[300px]">
+        <label
+          v-if="!route.fullPath.includes('/user')"
+          class="input w-full text-black input-bordered border border-solid input-sm flex justify-between items-center gap-2"
+        >
+          <input
+            @focus="focusChange"
+            @blur="blurChange"
+            ref="searchInput"
+            type="text"
+            v-model="searchSpecies"
+            placeholder="Search species"
+          />
           <svg-icon
-            @click="homeClick"
-            class="mr-4 cursor-pointer"
             type="mdi"
-            :path="mdiHome"
-            :size="40"
+            :path="mdiMagnify"
+            class="text-pcs-primary"
           ></svg-icon>
+        </label>
+      </div>
 
-          <label
-            v-if="!route.fullPath.includes('/user')"
-            class="input text-black input-bordered border border-solid input-sm flex items-center gap-2"
-          >
-            <input
-              @focus="focusChange"
-              @blur="blurChange"
-              ref="searchInput"
-              type="text"
-              v-model="searchSpecies"
-              placeholder="Search species"
-            />
-            <svg-icon
-              type="mdi"
-              :path="mdiMagnify"
-              class="text-pcs-primary"
-            ></svg-icon>
-          </label>
-        </div>
+      <div v-if="userInfo != null" class="flex flex-row items-center">
+        <label
+          for="notice-drawer"
+          class="mr-2 relative flex items-center text-pcs-primary cursor-pointer"
+          @click="toNotice"
+        >
+          <p
+            v-if="events?.length != 0"
+            class="bg-red-500 rounded-full absolute -top-1 -right-1"
+            style="width: 10px; height: 10px"
+          ></p>
+          <svg-icon type="mdi" :path="mdiBellOutline"></svg-icon>
+        </label>
 
-        <div v-if="userInfo != null" class="flex flex-row items-center">
-          <label
-            for="notice-drawer"
-            class="mr-2 relative flex items-center cursor-pointer"
-            @click="toNotice"
-          >
-            <p
-              v-if="events?.length != 0"
-              class="bg-red-500 rounded-full absolute -top-1 -right-1"
-              style="width: 10px; height: 10px"
-            ></p>
-            <svg-icon type="mdi" :path="mdiBellOutline"></svg-icon>
-          </label>
+        <button
+          class="btn btn-xs mr-2 bg-pcs-primary text-white"
+          @click="logOut"
+        >
+          log out
+        </button>
+      </div>
 
-          <div
-            class="flex flex-row items-center gap-x-2 mr-4 cursor-pointer"
-            @click="userClick"
-          >
-            <img
-              :src="userInfo?.avatar ? '/img/' + userInfo?.avatar : noneHeader"
-              width="30"
-              height="30"
-              alt="用户头像"
-              class="rounded-full"
-            />
-            <span>{{ userInfo?.username }}</span>
-          </div>
-
-          <button class="btn btn-xs mr-2" @click="logOut">log out</button>
-        </div>
-
-        <div v-else class="flex flex-row gap-x-2">
-          <span class="p-1 cursor-pointer" @click="toLogin">login</span>
-          <span @click="toRegisterPage" class="p-1 cursor-pointer">
-            register
-          </span>
-        </div>
+      <div v-else class="flex flex-row gap-x-2 mr-2">
+        <span
+          class="p-1 cursor-pointer bg-pcs-primary rounded pl-2 pr-2"
+          @click="toLogin"
+        >
+          login
+        </span>
+        <span
+          @click="toRegisterPage"
+          class="p-1 cursor-pointer bg-pcs-primary rounded pl-2 pr-2"
+        >
+          register
+        </span>
       </div>
     </div>
   </header>
+
   <div class="drawer drawer-end z-50">
     <input id="notice-drawer" type="checkbox" class="drawer-toggle" />
     <div class="drawer-side">

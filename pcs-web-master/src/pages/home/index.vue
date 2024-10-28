@@ -236,7 +236,7 @@ const popuCLaClick = (item) => {
       </div>
 
       <div v-if="speciesList?.length == 0">
-        <p class="text-pcs-primary font-bold text-2xl">暂无数据</p>
+        <p class="text-pcs-primary font-bold text-2xl">No data available.</p>
       </div>
     </div>
 

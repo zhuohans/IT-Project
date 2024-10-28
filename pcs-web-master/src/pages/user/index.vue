@@ -183,6 +183,7 @@ const popularCla = ref([
   { id: 0, title: 'Flower' },
   { id: 1, title: 'Vegetable' },
   { id: 2, title: 'Tree' },
+  { id: 3, title: 'Fruit' },
 ])
 let temp = {}
 setTimeout(() => {

@@ -89,6 +89,7 @@ const closeModal = () => {
   >
     <div v-if="!isView" class="grid grid-cols-4 gap-2">
       <div
+        v-if="albumPage?.total > 0"
         v-for="item in albumPage?.records"
         @click="viewSpecies(item.id)"
         class="cursor-pointer card shadow rounded-xl"
@@ -111,6 +112,8 @@ const closeModal = () => {
           {{ item.latinName }}
         </p>
       </div>
+
+      <p v-else class="text-pcs-primary font-bold text-2xl">No data available.</p>
     </div>
 
     <dialog ref="speciesDialog" id="speciesDialog" class="modal">

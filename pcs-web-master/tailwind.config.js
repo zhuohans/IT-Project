@@ -9,10 +9,11 @@ module.exports = {
         'pcs-second': '#086C46',
         'pcs-species': '#f0f6f4',
         'pcs-border': 'rgba(8, 108, 70, 0.30)',
+        'pcs-tab-active': '#167e56',
       },
       scroll: {
         'scroll-hidden': {
-          /* Hide the scroll bar but still allow scrolling */
+          /* 隐藏滚动条但仍允许滚动 */
           '-webkit-scrollbar': 'display: none;',
           '-ms-overflow-style': 'none;',
           'scrollbar-width': 'none;',
