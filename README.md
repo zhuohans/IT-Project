@@ -44,7 +44,7 @@ A live address of the project is available <http://139.9.241.37:8837>.
 2. Install the required dependencies:
 
    ```bash
-   cd IT-Project/login/pcs-server
+   cd IT-Project/login
    mvn clean
    mvn package
    ```
