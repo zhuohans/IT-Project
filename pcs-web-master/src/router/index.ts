@@ -17,8 +17,8 @@ const router = createRouter({
           children: [
             {
               path: '/home/speciesDetail',
-              name: 'speciesDetail',
-              component: () => import('@/pages/home/species_detail/index.vue'),
+              name: 'homeSpeciesDetail',
+              component: () => import('@/components/species_detail/index.vue'),
             },
           ],
         },
@@ -26,34 +26,45 @@ const router = createRouter({
           path: '/user',
           name: 'user',
           component: () => import('@/pages/user/index.vue'),
-          redirect: '/user/detail',
+          redirect: '/user/footprints',
           children: [
-            {
-              path: '/user/detail',
-              name: 'userDetail',
-              component: () => import('@/pages/user/user_detail/index.vue'),
-            },
             {
               path: '/user/footprints',
               name: 'footprints',
               component: () => import('@/pages/user/footprints/index.vue'),
+              children: [
+                {
+                  path: '/user/footprints/speciesDetail',
+                  name: 'footprintsSpeciesDetail',
+                  component: () =>
+                    import('@/components/species_detail/index.vue'),
+                },
+              ],
             },
             {
               path: '/user/album',
               name: 'album',
               component: () => import('@/pages/user/album/index.vue'),
+              children: [
+                {
+                  path: '/user/album/speciesDetail',
+                  name: 'albumSpeciesDetail',
+                  component: () =>
+                    import('@/components/species_detail/index.vue'),
+                },
+              ],
             },
             {
               path: '/user/garden',
               name: 'garden',
               component: () => import('@/pages/user/garden/index.vue'),
             },
-            {
-              path: '/user/calendar',
-              name: 'calendar',
-              component: () => import('@/pages/user/calendar/index.vue'),
-            },
           ],
+        },
+        {
+          path: '/user/calendar',
+          name: 'calendar',
+          component: () => import('@/pages/user/calendar/index.vue'),
         },
       ],
     },

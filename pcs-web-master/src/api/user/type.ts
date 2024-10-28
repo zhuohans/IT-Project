@@ -9,25 +9,25 @@ export class UserPo {
   userId: string
   location: string
   username: string
-  nickName?: string | null // It can be a string or null
+  nickName?: string | null
   password: string
-  appId?: string | null // It can be a string or null
-  userType?: string | null // It can be a string or null
-  expiredTime?: string | null // It can be a string or null
-  pwdResetTime?: string | null // It can be a string or null
-  gender?: string | null // It can be a string or null
-  birthday?: string | null // It can be a string or null
-  nativePlace?: string | null // It can be a string or null
-  national?: string | null // It can be a string or null
-  politicsStatus?: string | null // It can be a string or null
-  post?: string | null // It can be a string or null
-  postLevel?: string | null // It can be a string or null
-  mostEducation?: string | null // It can be a string or null
-  graduatedSchool?: string | null // It can be a string or null
-  phone?: string | null // It can be a string or null
+  appId?: string | null
+  userType?: string | null
+  expiredTime?: string | null
+  pwdResetTime?: string | null
+  gender?: string | null
+  birthday?: string | null
+  nativePlace?: string | null
+  national?: string | null
+  politicsStatus?: string | null
+  post?: string | null
+  postLevel?: string | null
+  mostEducation?: string | null
+  graduatedSchool?: string | null
+  phone?: string | null
   email: string
-  certificateType?: string | null // It can be a string or null
-  certificateNo?: string | null // It can be a string or null
-  avatar?: string | null // It can be a string or null
+  certificateType?: string | null
+  certificateNo?: string | null
+  avatar?: string | null
   userConfig?: any
 }
