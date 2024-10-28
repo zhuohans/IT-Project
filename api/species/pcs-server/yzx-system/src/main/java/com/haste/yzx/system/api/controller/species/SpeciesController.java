@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/species")
-@Tag(name = "物种服务")
+@Tag(name = "Species Service")
 public class SpeciesController extends BaseUserController {
 
     @Resource
@@ -30,7 +30,7 @@ public class SpeciesController extends BaseUserController {
 
 
 
-    @Operation(summary = "获取新上传的物种列表")
+    @Operation(summary = "Get list of newly uploaded species")
     @PostMapping("/list/news")
     public Response<Page<SpeciesInfo>> getSpeciesNewsList(@RequestBody SpeciesQueryInfo queryInfo) {
         return Response.success(speciesService.getSpeciesNewsList(queryInfo));
@@ -39,13 +39,13 @@ public class SpeciesController extends BaseUserController {
 
 
     @PostMapping(value = "uploadFile", headers = "content-type=multipart/form-data")
-    @Operation(summary = "上传文件，上限为10M,返回http地址")
+    @Operation(summary = "Upload file with a limit of 10MB, returns HTTP address")
     public Response<String> uploadFile(@RequestParam(value = "file", required = true) MultipartFile file) throws IOException {
 
         return Response.success(FileInfoUtil.saveFile(file));
     }
 
-    @Operation(summary = "删除物种")
+    @Operation(summary = "Delete species")
     @PostMapping("/del/{id}")
     public Response delSpeciesList(@PathVariable Long id) {
         if (null != id) {
@@ -54,7 +54,7 @@ public class SpeciesController extends BaseUserController {
         return Response.success();
     }
 
-    @Operation(summary = "新增物种")
+    @Operation(summary = "Add new species")
     @PostMapping("/add")
     public Response addSpecies(@RequestBody SpeciesInfo info) {
         String uid = super.getUserInfo().getUserId();
@@ -72,7 +72,7 @@ public class SpeciesController extends BaseUserController {
 
     }
 
-    @Operation(summary = "修改物种")
+    @Operation(summary = "Update species")
     @PostMapping("/update")
     public Response updateSpecies(@RequestBody SpeciesInfo info) {
         String uid = super.getUserInfo().getUserId();
@@ -87,7 +87,7 @@ public class SpeciesController extends BaseUserController {
         return Response.error(" execute updateSpecies failed!");
     }
 
-    @Operation(summary = "发布/不发布物种")
+    @Operation(summary = "Publish/Unpublish species")
     @PostMapping("/publish/{id}")
     public Response publishSpecies(@PathVariable Long id, Integer visible) {
         String uid = super.getUserInfo().getUserId();
@@ -102,7 +102,7 @@ public class SpeciesController extends BaseUserController {
         return Response.success();
     }
 
-    @Operation(summary = "点赞")
+    @Operation(summary = "Like")
     @PostMapping("/like/{id}")
     public Response likeSpecies(@PathVariable Long id, Integer like) {
         if (like == null) {
@@ -116,7 +116,7 @@ public class SpeciesController extends BaseUserController {
         return Response.success();
     }
 
-    @Operation(summary = "收藏")
+    @Operation(summary = "Collect")
     @PostMapping("/collect/{id}")
     public Response collectSpecies(@PathVariable Long id, Integer collect) {
         if (collect == null) {
@@ -131,7 +131,7 @@ public class SpeciesController extends BaseUserController {
         return Response.success();
     }
 
-    @Operation(summary = "浏览")
+    @Operation(summary = "View")
     @PostMapping("/view/{id}")
     public Response<SpeciesInfoBo> viewSpecies(@PathVariable Long id) {
         String uid = super.getUserInfo().getUserId();
@@ -142,7 +142,7 @@ public class SpeciesController extends BaseUserController {
         return Response.success(speciesInfoBo);
     }
 
-    @Operation(summary = "评论")
+    @Operation(summary = "Comment")
     @PostMapping("/comment/{id}")
     public Response<SpeciesInfoBo> commentSpecies(@PathVariable Long id, @RequestBody Map<String,String> map, Integer act) {
         String uid = super.getUserInfo().getUserId();
@@ -156,11 +156,11 @@ public class SpeciesController extends BaseUserController {
     }
 
     /**
-     * @param id  帖子id
-     * @param commentId  评论id
+     * @param id  Post id
+     * @param commentId  Comment id
      * @return
      */
-    @Operation(summary = "删除评论")
+    @Operation(summary = "Delete comment")
     @PostMapping("/comment/del/{id}/{commentId}")
     public Response<SpeciesInfoBo> delCommentSpecies(@PathVariable(name = "id") Long id,@PathVariable(name = "commentId") Long commentId) {
         String uid = super.getUserInfo().getUserId();
@@ -172,7 +172,7 @@ public class SpeciesController extends BaseUserController {
         return commentSpecies(id);
     }
 
-    @Operation(summary = "评论列表")
+    @Operation(summary = "Comment list")
     @PostMapping("/comment/list")
     public Response<SpeciesInfoBo> commentSpecies(@PathVariable Long id) {
         SpeciesInfoBo infoBo = new SpeciesInfoBo();
